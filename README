@@ -1,0 +1,17 @@
+A web application that keeps track of the incoming, outgoing and current stock at a specific inventory.
+
+1. Dashboard:
+Home page of the application has a graphical representation of the incoming, outgoing and current stock at a specific inventory.
+
+2. Current Stock:
+A page which lists the current stock at the inventory.
+
+3. Inbound:
+It shows the list of contributors with its corresponding date of inbound. 
+It allows addition of new contributors, with their contributions and then updates the current stock. 
+It also provides a list of all the contributions from a selected contributor.
+
+4. Outbound:
+It shows the list of applicants that requested for items, with the corresponding date of outbound. 
+It allows new requests by any applicant for the required items and then updates the current stock. 
+It also provides a list of all the consumed product from any selected applicant.
