@@ -1,0 +1,57 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/images/welcome.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.welcome {
+    position: absolute;
+    margin-left: 30px;
+    margin-top: 200px;
+}
+
+h1 {
+    color: rgb(168, 154, 126);
+    text-shadow: 2px 2px #272727;
+    font-size: 70px;
+    text-align: center;
+}
+
+.main-nav {
+    /* background-color: #555; */
+    float: right;
+    list-style: none;
+    margin-top: 30px;
+}
+
+.main-nav li {
+    display: inline-block;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Gill Sans';
+    padding: 5px 20px;
+}
+
+.main-nav li.active a {
+    border: 1px solid white;
+}
+
+.main-nav li a:hover {
+    border: 1px solid white;
+}
+
+.logo img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+    float: left;
+}
