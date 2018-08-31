@@ -1,48 +1,11 @@
 body {
     margin: 0px;
     padding: 0px;
-}
-
-header {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../assets/images/welcome.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
-}
 
-.login {
-    width: 23%;
-    height: 60%;
-    
-    background: rgb(169,169,169,0.5);
-    box-sizing: border-box;
-    position: absolute;
-    box-align: center;
-    border-radius: 10px;
-    margin-top: 10%;
-    margin-left: 38%;
-    padding: 50px 30px;
-}
-
-.login input {
-    margin-bottom: 20px;
-    height:10%;
-    width:90%;
-    border-radius: 5px;
-    border: 1px solid black;
-}
-
-.login button {
-    margin-left: 30%;
-    height:12%;
-}
-
-h3 {
-    color: rgb(168, 154, 126);
-    text-shadow: 2px 2px #272727;
-    margin: 0px;
-    font-size: 40px;
-    text-align: center;
 }
 
 .main-nav {
@@ -68,8 +31,9 @@ h3 {
 }
 
 .nav {
-    float:right;
+    float: right;
 }
+
 .main-nav li a:hover {
     border: 1px solid white;
 }
@@ -77,9 +41,57 @@ h3 {
 .logo img {
     min-width: 0px;
     /* max-width: 150px; */
-    
-    width:10%;
+    width: 10%;
     height: auto;
     border-radius: 50%;
     float: left;
+}
+
+/* outer {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+} */
+
+.login {
+    width: 310px;
+    /* width: 40%; */
+
+    position: relative;
+    margin: auto;
+    background: rgb(169, 169, 169, 0.5);
+    box-sizing: border-box;
+    box-align: center;
+    border-radius: 10px;
+    margin-top: 10%;
+    margin-left: 28%;
+    padding: 50px 30px;
+    display: inline-block;
+}
+
+.login input {
+    margin-bottom: 20px;
+    height: 30px;
+    width: 240px;
+    /* height: 10%;
+    width: 90%; */
+    
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.login button {
+    margin-left: 30%;
+    /* height:5%; */
+}
+
+h3 {
+    color: rgb(168, 154, 126);
+    text-shadow: 2px 2px #272727;
+    margin: 0px;
+    font-size: 40px;
+    text-align: center;
 }
