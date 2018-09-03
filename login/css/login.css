@@ -7,54 +7,7 @@ body {
     background-position: center;
 
 }
-
-.main-nav {
-    /* background-color: #555; */
-    float: right;
-    list-style: none;
-    margin-top: 30px;
-}
-
-.main-nav li {
-    display: inline-block;
-}
-
-.main-nav a {
-    color: white;
-    text-decoration: none;
-    font-family: 'Gill Sans';
-    padding: 5px 20px;
-}
-
-.main-nav li.active a {
-    border: 1px solid white;
-}
-
-.nav {
-    float: right;
-}
-
-.main-nav li a:hover {
-    border: 1px solid white;
-}
-
-.logo img {
-    min-width: 0px;
-    /* max-width: 150px; */
-    width: 10%;
-    height: auto;
-    border-radius: 50%;
-    float: left;
-}
-
-/* outer {
-    width: 100%;
-    text-align: center;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-} */
+ 
 
 .login {
     width: 310px;
