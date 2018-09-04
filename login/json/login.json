@@ -1,5 +1,16 @@
 {
-    "maalu": "12345678",
-    "maalup": "123456",
-    "user": "qwerty"
+    "users": [
+        {
+            "username": "maalupascal",
+            "password": "12345678"
+        },
+        {
+            "username": "maalup",
+            "password": "123456"
+        },
+        {
+            "username": "user",
+            "password": "qwerty"
+        }
+    ]
 }
