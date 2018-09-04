@@ -7,7 +7,7 @@ function submitUser() {
         .then((out) => {
             console.log('Output: ', out[userName]);
             if (out[userName] === userPassword) {
-                home();
+                containerContent('../home/html/home.html');
             } else {
                 alert("Invalid Username/Password");
             }

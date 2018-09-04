@@ -1,12 +1,5 @@
 window.onload = function (event) {
-    welcome();
-}
-
-function welcome() {
-    req = new XMLHttpRequest();
-    req.open("GET", "../welcome/html/welcome.html", false);
-    req.send(null);
-    document.getElementById("content").innerHTML = req.responseText;
+    containerContent('../welcome/html/welcome.html');
 }
 
 function login() {
@@ -19,6 +12,13 @@ function login() {
 function home() {
     req = new XMLHttpRequest();
     req.open("GET", "../home/html/home.html", false);
+    req.send(null);
+    document.getElementById("content").innerHTML = req.responseText;
+}
+
+function containerContent(url) {
+    req = new XMLHttpRequest();
+    req.open("GET", url, false);
     req.send(null);
     document.getElementById("content").innerHTML = req.responseText;
 }
