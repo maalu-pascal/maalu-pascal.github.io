@@ -1,47 +1,28 @@
-body {
-    margin: 0px;
-    padding: 0px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../assets/images/welcome.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-
-}
- 
-
 .login {
     width: 310px;
-    /* width: 40%; */
-
     position: relative;
     margin: auto;
     background: rgb(169, 169, 169, 0.5);
     box-sizing: border-box;
     box-align: center;
     border-radius: 10px;
-    margin-top: 10%;
-    margin-left: 28%;
+    margin-left: 30%;
     padding: 50px 30px;
-    display: inline-block;
 }
 
 .login input {
     margin-bottom: 20px;
     height: 30px;
     width: 240px;
-    /* height: 10%;
-    width: 90%; */
-    
     border-radius: 5px;
     border: 1px solid black;
 }
 
 .login button {
     margin-left: 30%;
-    /* height:5%; */
 }
 
-h3 {
+.login h3 {
     color: rgb(168, 154, 126);
     text-shadow: 2px 2px #272727;
     margin: 0px;

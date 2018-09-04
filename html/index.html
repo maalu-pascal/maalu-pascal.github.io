@@ -3,26 +3,36 @@
 
 <head>
     <title>Inventory Management System</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/home.css" />
-    <script src="main.js" ></script>
-    <!-- <script src="../login/js/login.js" defer></script> -->
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../welcome/css/welcome.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../login/css/login.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
+
+    <script src="../js/main.js"></script>
+    <script src="../login/js/login.js" defer></script>
+    
 </head>
 
 <body>
-    <header>
-        <div class="row">
-            <div class="logo">
-                <img src="../assets/images/logo.jpeg">
+    <div>
+        <header>
+            <div class="row">
+                <div class="logo">
+                    <img src="../assets/images/logo.jpeg">
+                </div>
+
+                <ul class="main-nav">
+                    <li><button type="button" class="nav-button" id="home" onclick="welcome()">HOME</button></li>
+                    <li><button type="button" class="nav-button" id="loginbutton" onclick="login()">LOGIN</button> </li>
+                </ul>
             </div>
+        </header>
 
-            <ul class="main-nav">
-                <li><button type="button" class="nav-button" id="home" onclick="home()">Home</button></li>
-                <li><button type="button" class="nav-button" id="loginbutton" onclick="login()" >LOGIN</button> </li>
-            </ul>
-        </div>
-
-        <section id="content"></section>
-
-    </header>
+        <section class="content">
+            <div id="content">
+            </div>
+        </section>
+    </div>
 </body>
+
 </html>
