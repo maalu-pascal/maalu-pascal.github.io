@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../login/css/login.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
 
+
     <script src="../js/main.js"></script>
     <script src="../login/js/login.js" defer></script>
 
@@ -15,23 +16,34 @@
 
 <body>
     <div>
-        <header>
-            <div class="row">
-                <div class="logo">
-                    <img src="../assets/images/logo.jpeg">
-                </div>
-
+        <div class="row">
+            <div class="logo">
+                <img src="../assets/images/logo.jpeg">
+            </div>
+            <div class="top-nav">
                 <ul class="main-nav">
-                    <li><button type="button" class="nav-button" id="home" onclick="containerContent('../welcome/html/welcome.html')" >HOME</button></li>
-                    <li><button type="button" class="nav-button" id="loginbutton" onclick="containerContent('../login/html/login.html')">LOGIN</button> </li>
+                    <li><button type="button" class="nav-button" id="home" onclick="containerContent('../welcome/html/welcome.html')">HOME</button></li>
+                    <li><button type="button" class="nav-button" id="loginButton" onclick="containerContent('../login/html/login.html')">LOGIN</button></li>
+                    <li><button type="button" class="nav-button" id="logoutButton" onclick="logout()">LOGOUT</button></li>
+
                 </ul>
             </div>
-        </header>
+        </div>
 
-        <section class="content">
-            <div id="content">
+        <div class="row">
+
+            <div class="side-nav">
+                <div id="side-nav">
+                    
+                </div>
             </div>
-        </section>
+
+            <div class="content">
+                <div id="content">
+                </div>
+            </div>
+
+        </div>
     </div>
 </body>
 

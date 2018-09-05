@@ -1,7 +1,41 @@
 window.onload = function (event) {
-    containerContent('../welcome/html/welcome.html');
+    var status = localStorage.getItem("userStatus");
+    nav(localStorage.getItem("userStatus"));
+    if (status == "logged-in") {
+        containerContent('../dashboard/html/dashboard.html');
+    } else {
+        containerContent('../welcome/html/welcome.html');
+    }
+}
+function nav(status) {
+    if (status == "logged-in") {
+        document.getElementById("home").style.display = "none";
+        document.getElementById("loginButton").style.display = "none";
+
+        document.getElementById("logoutButton").style.display = "block";
+        document.getElementById("side-nav").style.display = "block";
+
+    } else {
+
+        document.getElementById("home").style.display = "block";
+        document.getElementById("loginButton").style.display = "block";
+
+        document.getElementById("logoutButton").style.display = "none";
+        document.getElementById("side-nav").style.display = "none";
+    }
 }
 
+function login() {
+    localStorage.setItem("userStatus", "logged-in");
+    nav('logged-in');
+    containerContent('../dashboard/html/dashboard.html');
+}
+
+function logout() {
+    localStorage.setItem("userStatus", "logged-out");
+    nav('logged-out');
+    containerContent('../login/html/login.html')
+}
 function containerContent(url) {
     req = new XMLHttpRequest();
     req.open("GET", url, false);

@@ -5,14 +5,14 @@ function submitUser() {
     fetch('../login/json/login.json')
         .then(res => res.json())
         .then((out) => {
-            out.users.forEach(element => {
-
+            for (element of out.users) {
                 if ((element.username === userName) && (element.password === userPassword)) {
                     userFound = 1;
-                    containerContent('../home/html/home.html');
+                    login();
+                    break;
                 }
             }
-            );
+
             if (!userFound) {
                 alert("Invalid Username/Password");
             }
