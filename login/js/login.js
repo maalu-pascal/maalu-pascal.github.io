@@ -6,11 +6,10 @@ function submitUser() {
         .then(res => res.json())
         .then((out) => {
             out.users.forEach(element => {
-                console.log(element.username);
+
                 if ((element.username === userName) && (element.password === userPassword)) {
                     userFound = 1;
                     containerContent('../home/html/home.html');
-
                 }
             }
             );
