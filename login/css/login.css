@@ -1,0 +1,34 @@
+.login {
+    width: 310px;
+    position: relative;
+    margin: auto;
+    background: rgb(169, 169, 169, 0.5);
+    box-sizing: border-box;
+    box-align: center;
+    border-radius: 10px;
+    margin-left: 30%;
+    padding: 50px 30px;
+}
+#errorMessage {
+    color: rgb(163, 3, 3);
+}
+
+.login input {
+    margin-bottom: 20px;
+    height: 30px;
+    width: 240px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.login button {
+    margin-left: 30%;
+}
+
+.login h3 {
+    color: rgb(168, 154, 126);
+    text-shadow: 2px 2px #272727;
+    margin: 0px;
+    font-size: 40px;
+    text-align: center;
+}

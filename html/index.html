@@ -3,25 +3,48 @@
 
 <head>
     <title>Inventory Management System</title>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../welcome/css/welcome.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../login/css/login.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
-    <script src="../js/main.js" defer></script>
+
+
+    <script src="../js/main.js"></script>
+    <script src="../login/js/login.js" ></script>
+
 </head>
 
 <body>
-    <header>
+    <div>
         <div class="row">
             <div class="logo">
                 <img src="../assets/images/logo.jpeg">
             </div>
-            <ul class="main-nav">
-                <li class="active"><a href="">HOME</a></li>
-                <li><a href="../login/html/login.html">LOGIN</a></li>
-            </ul>
+            <div class="top-nav">
+                <ul class="main-nav">
+                    <li><button type="button" class="nav-button" id="home" onclick="containerContent('../welcome/html/welcome.html')">HOME</button></li>
+                    <li><button type="button" class="nav-button" id="loginButton" onclick="containerContent('../login/html/login.html')">LOGIN</button></li>
+                    <li><button type="button" class="nav-button" id="logoutButton" onclick="logout()">LOGOUT</button></li>
+
+                </ul>
+            </div>
         </div>
-        <div class="welcome">
-            <h1>Inventory Management System</h1>
+
+        <div class="row">
+
+            <div class="side-nav">
+                <div id="side-nav">
+                    
+                </div>
+            </div>
+
+            <div class="content">
+                <div id="content">
+                </div>
+            </div>
+
         </div>
-    </header>
+    </div>
 </body>
 
 </html>
