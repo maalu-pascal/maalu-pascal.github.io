@@ -7,10 +7,14 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../welcome/css/welcome.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../login/css/login.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../dashboard/css/dashboard.css" />
 
+    <script src="../node_modules/chart.js/dist/Chart.js"></script>
 
     <script src="../js/main.js"></script>
-    <script src="../login/js/login.js" ></script>
+    <script src="../login/js/login.js" defer></script>
+    <script src="../dashboard/js/dashboard.js" defer></script>
+
 
 </head>
 
@@ -34,7 +38,12 @@
 
             <div class="side-nav">
                 <div id="side-nav">
-                    
+                    <ul>
+                        <li><button type="button" id="dashboard" onclick="dashboard()" >DASHBOARD</button></li>
+                        <li><button type="button" id="currentStock" onclick="currentStock()" >CURRENT STOCK</button></li>
+                        <li><button type="button" id="inbound" onclick="inbound()" >INBOUND</button></li>
+                        <li><button type="button" id="outbound" onclick="outbound()" >OUTBOUND</button></li>
+                    </ul>
                 </div>
             </div>
 

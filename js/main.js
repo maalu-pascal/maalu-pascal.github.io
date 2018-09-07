@@ -3,10 +3,13 @@ window.onload = function (event) {
     nav(localStorage.getItem("userStatus"));
     if (status == "logged-in") {
         containerContent('../dashboard/html/dashboard.html');
+        loadChart();
+
     } else {
         containerContent('../welcome/html/welcome.html');
     }
 }
+
 function nav(status) {
     if (status == "logged-in") {
         document.getElementById("home").style.display = "none";
@@ -16,7 +19,6 @@ function nav(status) {
         document.getElementById("side-nav").style.display = "block";
 
     } else {
-
         document.getElementById("home").style.display = "block";
         document.getElementById("loginButton").style.display = "block";
 
@@ -28,7 +30,7 @@ function nav(status) {
 function login() {
     localStorage.setItem("userStatus", "logged-in");
     nav('logged-in');
-    containerContent('../dashboard/html/dashboard.html');
+    dashboard();
 }
 
 function logout() {
@@ -36,9 +38,15 @@ function logout() {
     nav('logged-out');
     containerContent('../login/html/login.html')
 }
+
 function containerContent(url) {
     req = new XMLHttpRequest();
     req.open("GET", url, false);
     req.send(null);
     document.getElementById("content").innerHTML = req.responseText;
+}
+
+function dashboard() {
+    containerContent('../dashboard/html/dashboard.html');
+    loadChart();
 }
