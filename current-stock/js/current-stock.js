@@ -4,14 +4,7 @@ function currentStock() {
 }
 
 function displayCurrentStock() {
-
-    // var data = fetch('../dashboard/json/dashboard.json')
-    //     .then(res => res.json())
-    //     .then((out) => {
-    //         var stock = JSON.stringify(out);
-    //         localStorage.setItem("stock", stock);
-    //     }).catch(err => console.error(err));
-
+    
     var data = localStorage.getItem("stock");
     var stock = JSON.parse(data);
     var table = document.getElementById("currentStockData");
