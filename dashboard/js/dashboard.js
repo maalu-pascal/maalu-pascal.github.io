@@ -1,7 +1,11 @@
 function loadChart() {
     var ctx = document.getElementById("myChart").getContext('2d');
+   
+    var req = new XMLHttpRequest();
+    req.open("GET", '../dashboard/json/dashboard.json', false);
+    req.send(null);
 
-    var data = localStorage.getItem("stock");
+    var data = req.responseText;
     var stock = JSON.parse(data);
 
     var current_food = 0;
@@ -32,11 +36,13 @@ function loadChart() {
         }
     }
 
+    //Dummy values for inbound
     var inbound_food = 25;
     var inbound_clothes = 15;
     var inbound_toileteries = 13;
     var inbound_medicines = 13;
 
+    //Dummy values for outbound
     var outbound_food = 50;
     var outbound_clothes = 32;
     var outbound_toileteries = 12;
