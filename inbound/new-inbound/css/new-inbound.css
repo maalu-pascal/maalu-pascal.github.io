@@ -1,0 +1,13 @@
+#selectOptions {
+    display: flex;
+    flex-direction: column;
+}
+ #newItem {
+     width: 100%;
+ }
+select {
+    width:50%;
+}
+input{
+    width: 50%;
+}
