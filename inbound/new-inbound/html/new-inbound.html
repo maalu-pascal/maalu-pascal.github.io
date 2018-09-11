@@ -1,24 +1,13 @@
 <div class="container">
-    <div id="selectOptions">
-        <!-- <div id = "newItem"> -->
-            <!-- <div>
-                <select id="selectCategory" class="selectCategory"  onchange="selectItem()" autofocus></select>
+    <div class="newInboundContainer">
+        <div class="form">
+            <input type="text" id="InboundName" class="InboundName" placeholder="Enter name">
+            <button type="button" id="submitList" onclick="submitList()">Submit</button>
+        </div>
+        <div>
+            <button type="button" id="insertItem" onclick="newItem()">&ensp;+&ensp; </button>
+        </div>
 
-                <select class="selectItem" id="selectItem" onchange="selectSubItem()"></select>
-
-                <select class="selectSubCategoryItem" id="selectSubCategoryItem" onchange="quantity()"></select>
-            </div>
-            <div>
-                <input type="text" id="quantity" placeholder="Enter Quantity of item">
-            </div> -->
-        <!-- </div> -->
-    </div>
-    <br>
-    <br>
-    <div>
-        <button type="button" id="insertItem" onclick="newItem()">Add</button>
-        <button type="button" id="submitList" onclick="submitList()">Submit</button>
-
+        <div class="selectors" id="selectors"></div>
     </div>
 </div>
-

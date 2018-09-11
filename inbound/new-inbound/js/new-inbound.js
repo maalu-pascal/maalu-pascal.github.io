@@ -1,79 +1,115 @@
+var itemNumber;
 
 function newInbound() {
     containerContent('../inbound/new-inbound/html/new-inbound.html');
-    
+    localStorage.setItem('last_val', 0);
+    itemNumber = 0;
     insertItem();
 }
 
-function insertItem() {
 
-    document.getElementById("selectItem").style.visibility = "hidden";
-    document.getElementById("selectSubCategoryItem").style.visibility = "hidden";
-    document.getElementById("quantity").disabled = true;
+
+
+function newItem() {
+    var error = validate(localStorage.getItem('last_val'));
+    if (error) {
+        alert(error);
+    } else {
+        insertItem();
+    }
+
+}
+function insertItem() {
+    var selector = document.getElementById("selectors");
+
+    var insertItems = document.createElement("div");
+    insertItems.setAttribute("id","selectOptions[" + itemNumber + "]");
+    insertItems.setAttribute("class","selectOptions");
+    
+    selector.appendChild(insertItems);
+    selector.focus();
 
     var data = localStorage.getItem("stock");
     var stock = JSON.parse(data);
 
-    var itemCategory = document.getElementById("selectCategory");
-    itemCategory.innerHTML = "";
+
+    var itemCategory = document.createElement("select");
+    itemCategory.setAttribute("id", "selectCategory[" + itemNumber + "]");
+    itemCategory.setAttribute("class", "selectCategory");
+
+    itemCategory.setAttribute("onchange", "selectItem(" + itemNumber + ")");
+    document.getElementById("selectOptions[" + itemNumber + "]").appendChild(itemCategory);
 
     var option = document.createElement("option");
-    option.text = "Select Category";
-    option.value = "";
+    var text = document.createTextNode("Select category");
+    option.setAttribute("value", "");
+    option.appendChild(text);
     itemCategory.appendChild(option);
 
     for (category in stock.currentStock) {
         var option = document.createElement("option");
-        option.text = category;
-        option.value = category;
-
+        var text = document.createTextNode(category);
+        option.appendChild(text);
+        option.setAttribute("value", category);
         itemCategory.appendChild(option);
     }
 
+    localStorage.setItem('last_val', itemNumber);
+    itemNumber++;
 }
 
-function selectItem() {
-
+function selectItem(param) {
     var data = localStorage.getItem("stock");
     var stock = JSON.parse(data);
-    document.getElementById("selectItem").style.visibility = "visible";
 
-    var itemCategory = document.getElementById("selectCategory").value;
-    var items = document.getElementById("selectItem");
-    items.innerHTML = "";
+    var itemCategory = document.getElementById("selectCategory[" + param + "]").value;
 
+    if (param == localStorage.getItem('last_val') && (!document.getElementById("selectItem[" + param + "]"))) {
+        var items = document.createElement("select");
+        items.setAttribute("id", "selectItem[" + param + "]");
+        items.setAttribute("class", "selectItem");
+        items.setAttribute("onchange", "selectSubCategoryItem(" + param + ")");
+        document.getElementById("selectOptions[" + param + "]").appendChild(items);
+
+    } else {
+        var items = document.getElementById("selectItem[" + param + "]");
+        while (items.firstChild) {
+            items.removeChild(items.firstChild);
+        }
+    }
     var option = document.createElement("option");
-    option.style.visibility = "visible";
-    option.text = "Select item";
-    option.value = "";
+    var text = document.createTextNode("Select item");
+    option.setAttribute("value", "");
+    option.appendChild(text);
     items.appendChild(option);
 
     for (item in stock.currentStock[itemCategory]) {
         var option = document.createElement("option");
-        option.text = item;
-        option.value = item;
+        var text = document.createTextNode(item);
+        option.appendChild(text);
+        option.setAttribute("value", item);
         items.appendChild(option);
     }
-    document.getElementById("selectItem").addEventListener("change", selectSubItem);
-
 }
 
-function selectSubItem() {
-    var itemCategory = document.getElementById("selectCategory").value;
-    var subCategory = document.getElementById("selectItem").value;
+function selectSubCategoryItem(param) {
+    var itemCategory = document.getElementById("selectCategory[" + param + "]").value;
+    var subCategory = document.getElementById("selectItem[" + param + "]").value;
 
-    console.log("success");
     if (itemCategory == "clothes") {
         var data = localStorage.getItem("stock");
         var stock = JSON.parse(data);
-        document.getElementById("selectSubCategoryItem").style.visibility = "visible";
 
-        var items = document.getElementById("selectSubCategoryItem");
-        items.innerHTML = "";
+        var items = document.createElement("select");
+        items.setAttribute("id", "selectSubCategoryItem[" + param + "]");
+        items.setAttribute("class", "selectSubCategoryItem");
+        items.setAttribute("onchange", "quantity(" + param + ")");
+        document.getElementById("selectOptions[" + param + "]").appendChild(items);
 
         var option = document.createElement("option");
-        option.text = "Select item";
-        option.value = "";
+        option.setAttribute("value", "");
+        var text = document.createTextNode("Select item");
+        option.appendChild(text);
         items.appendChild(option);
 
         for (item in stock.currentStock[itemCategory][subCategory]) {
@@ -82,48 +118,96 @@ function selectSubItem() {
             option.value = item;
             items.appendChild(option);
         }
-        document.getElementById("selectSubCategoryItem").addEventListener("change", quantity);
-
-
-    } else {
-        quantity();
+    } else {                //No sub-category.
+        quantity(param);
     }
 }
 
-function quantity() {
+function quantity(param) {
+    if (param == localStorage.getItem('last_val') && (!document.getElementById("quantity[" + param + "]"))) {
+        var itemQuantity = document.createElement("input");
+        itemQuantity.setAttribute("id", "quantity[" + param + "]");
+        itemQuantity.setAttribute("class", "quantity");
+        itemQuantity.setAttribute("placeholder", "Enter quantity of item");
+        document.getElementById("selectOptions[" + param + "]").appendChild(itemQuantity);
 
-    var itemQuantity = document.getElementById("quantity");
-    itemQuantity.disabled = false;
+    }
 }
 
-function newItem() {
-    var itemCategory = document.getElementById("selectCategory").value;
-    var item = document.getElementById("selectItem").value;
-    var subCategoryItem = document.getElementById("selectSubCategoryItem").value;
-
-    var itemQuantity = document.getElementById("quantity").value;
-
-    console.log("qw", itemCategory, item, subCategoryItem, itemQuantity);
-
-    document.getElementById("selectCategory").selectedIndex = "0";
-    document.getElementById("selectItem").selectedIndex = "0";
-    document.getElementById("selectSubCategoryItem").selectedIndex = "0";
-    document.getElementById("quantity").value = "";
-}
-
-function submit() {
-    if ((document.getElementById("selectCategory").value == "")) {// || (document.getElementById("selectItem") == null) || (document.getElementById("selectSubCategoryItem") == null)) {
-        alert("Please choose an input");
-
-    } else {
-        if (document.getElementById("quantity").value == "") {
-            alert("Quantity cannot be left empty");
+function validate(param) {
+    var alert;
+    if (document.getElementById("selectCategory[" + param + "]").value === "") {
+        alert = "Please select category!";
+        document.getElementById("selectCategory[" + param + "]").focus();
+    } else if (document.getElementById("selectItem[" + param + "]").value === "") {
+        alert = "Please select item!";
+        document.getElementById("selectItem[" + param + "]").focus();
+    } else if (document.getElementById("selectCategory[" + param + "]").value == "clothes") {
+        if (document.getElementById("selectSubCategoryItem[" + param + "]").value === "") {
+            alert = "Please select item!";
+            document.getElementById("selectSubCategoryItem[" + param + "]").focus();
         } else {
-            if (document.getElementById("quantity").value == "") {
-                alert("Quantity cannot be left empty");
-            } else {
-
+            if (document.getElementById("quantity[" + param + "]").value == "") {
+                alert = "Please enter quantity!";
+                document.getElementById("quantity[" + param + "]").focus();
             }
         }
+    } else {
+        if (document.getElementById("quantity[" + param + "]").value == "") {
+            alert = "Please enter quantity!";
+            document.getElementById("quantity[" + param + "]").focus();
+
+        }
     }
+    return alert;
+}
+
+function submitList() {
+    var error = validate(localStorage.getItem('last_val'));
+    if (error) {
+        alert(error);
+    } else {
+        if(!document.getElementById("InboundName").value) {
+            alert("Please enter name!");
+        } else {
+            var name = document.getElementById("InboundName").value;
+
+            var request = new XMLHttpRequest();
+            request.open("GET", "../inbound/new-inbound/json/newInboundObject.json", false);
+            request.send(null);
+            var newObject = request.responseText;
+            newObject = JSON.parse(newObject);
+    
+            newObject.name = name;
+            newObject.date = Date();
+    
+            var itemCategory = document.getElementsByClassName("selectCategory");
+            var itemSubCategoryItem = document.getElementsByClassName("selectSubCategoryItem");
+            var itemName = document.getElementsByClassName("selectItem");
+            var itemQuantity = document.getElementsByClassName("quantity");
+    
+            for (id in itemCategory) {
+                if (itemCategory[id].value) {
+                    if(itemCategory[id].value == "clothes") {
+                        newObject.inbound[itemCategory[id].value][itemName[id].value][itemSubCategoryItem[id].value] += parseInt(itemQuantity[id].value);
+                        console.log(newObject.inbound[itemCategory[id].value][itemName[id].value][itemSubCategoryItem[id].value]);
+                    } else {
+                        newObject.inbound[itemCategory[id].value][itemName[id].value] += parseInt(itemQuantity[id].value);
+                    }
+                }
+            }
+            console.log(newObject);
+
+            var inboundList = localStorage.getItem("inbound");
+            inboundList = JSON.parse(inboundList);
+    
+            inboundList.push(newObject);
+    
+            inboundList = JSON.stringify(inboundList);
+            localStorage.setItem("inbound",inboundList);
+            dashboard();
+
+        }
+    }
+
 }

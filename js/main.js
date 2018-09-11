@@ -12,13 +12,9 @@ window.onload = function (event) {
                 localStorage.setItem("stock", stock);
             }).catch(err => console.error(err));
     }
-    if(!localStorage.getItem("template")) {
-        var data = fetch('../shared/json/dataTemplate.json')
-            .then(res => res.json())
-            .then((out) => {
-                var stock = JSON.stringify(out);
-                localStorage.setItem("template", stock);
-            }).catch(err => console.error(err));
+    if(!localStorage.getItem("inbound")) {
+        localStorage.setItem("inbound", "[]");
+
     }
     
     
