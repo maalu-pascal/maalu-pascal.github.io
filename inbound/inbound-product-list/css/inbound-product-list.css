@@ -1,0 +1,56 @@
+#nameSpan, #dateSpan, .itemQuantity {
+    margin-left: 20px;
+    color: black;
+}
+
+.back {
+border-radius: 5px;
+background: #cecdcd;
+height :25px;
+font-weight: 550;
+color: #2c2c2c;
+
+}
+.back:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background: whitesmoke;
+    color: black;
+
+}
+
+.products td {
+    font-size: 17px;
+    font-weight: 550;
+}
+
+.productListContainer {
+    height: 100%;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    padding: 12% 20% 20% 20%;
+    overflow: scroll;
+}
+
+.products {
+    display: flex;
+    align-content: center;
+}
+
+.products h3 {
+    margin: 0px;
+}
+
+.productList {
+    width: 40%;
+    min-width: 350px;
+    background-color: #c2c2c2;
+    border-radius: 10px;
+    padding: 30px;
+    opacity: 1;
+    color: #313131;
+}
+
+.productsTable {
+    padding: 20px;
+}
