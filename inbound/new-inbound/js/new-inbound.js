@@ -190,13 +190,11 @@ function submitList() {
                 if (itemCategory[id].value) {
                     if(itemCategory[id].value == "clothes") {
                         newObject.inbound[itemCategory[id].value][itemName[id].value][itemSubCategoryItem[id].value] += parseInt(itemQuantity[id].value);
-                        console.log(newObject.inbound[itemCategory[id].value][itemName[id].value][itemSubCategoryItem[id].value]);
                     } else {
                         newObject.inbound[itemCategory[id].value][itemName[id].value] += parseInt(itemQuantity[id].value);
                     }
                 }
             }
-            console.log(newObject);
 
             var inboundList = localStorage.getItem("inbound");
             inboundList = JSON.parse(inboundList);
@@ -210,4 +208,4 @@ function submitList() {
         }
     }
 
-}
+} 
