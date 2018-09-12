@@ -1,9 +1,22 @@
+.inboundListDiv h1 {
+    margin:0px;
+    padding: 5px;
+    margin-top: 10px;
+    font-family: serif;
+    background-color: #dfdfdf;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-top-color: #a5a5a5;
+}
+
+
 .inboundTable {
     width: 100%;
-    border-radius: 5px;
     border: 3px solid #a5a5a5;
-
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
+
 .inboundListDiv {
     overflow: scroll;
     height: 100%;
@@ -12,8 +25,8 @@
 
 .newInbound {
 border-radius: 5px;
-margin:5px;
-float: right;
+margin:10px;
+float: left;
 background: #cecdcd;
 height :25px;
 font-weight: 550;
