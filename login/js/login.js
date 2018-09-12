@@ -4,9 +4,7 @@ function submitUser() {
     var userFound = 0;
     var errorMessage;
     if (userName == "" || userPassword == "") {
-        // alert("Please enter username/password");
         errorMessage = "*Please enter username/password";
-        // document.getElementById("errorMessage").innerHTML="Please enter username/password";
         document.getElementById("errorMessage").innerHTML = errorMessage;
 
     } else {

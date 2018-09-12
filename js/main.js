@@ -1,6 +1,6 @@
 window.onload = function (event) {
 
-    //Loading the necessary data into the local storage.
+    //Loading the necessary initial data into the local storage.
     if (!localStorage.getItem("userStatus")) {
         localStorage.setItem("userStatus", "logged-out");
     }
@@ -12,9 +12,13 @@ window.onload = function (event) {
                 localStorage.setItem("stock", stock);
             }).catch(err => console.error(err));
     }
+    if(!localStorage.getItem("inbound")) {
+        localStorage.setItem("inbound", "[]");
+
+    }
     
     var status = localStorage.getItem("userStatus");
-    nav(localStorage.getItem("userStatus"));
+    changeNavigationBar(localStorage.getItem("userStatus"));
     if (status == "logged-in") {
         containerContent('../dashboard/html/dashboard.html');
         loadChart();
@@ -24,7 +28,7 @@ window.onload = function (event) {
     }
 }
 
-function nav(status) {
+function changeNavigationBar(status) {
     if (status == "logged-in") {
         document.getElementById("home").style.display = "none";
         document.getElementById("loginButton").style.display = "none";
@@ -43,13 +47,13 @@ function nav(status) {
 
 function login() {
     localStorage.setItem("userStatus", "logged-in");
-    nav('logged-in');
+    changeNavigationBar('logged-in');
     dashboard();
 }
 
 function logout() {
     localStorage.setItem("userStatus", "logged-out");
-    nav('logged-out');
+    changeNavigationBar('logged-out');
     containerContent('../login/html/login.html')
 }
 
