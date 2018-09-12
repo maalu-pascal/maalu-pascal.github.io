@@ -177,9 +177,10 @@ function submitList() {
             request.send(null);
             var newObject = request.responseText;
             newObject = JSON.parse(newObject);
-    
+            
             newObject.name = name;
-            newObject.date = Date();
+            var date = new Date();
+            newObject.date = date.toDateString();
     
             var itemCategory = document.getElementsByClassName("selectCategory");
             var itemSubCategoryItem = document.getElementsByClassName("selectSubCategoryItem");
@@ -203,7 +204,7 @@ function submitList() {
     
             inboundList = JSON.stringify(inboundList);
             localStorage.setItem("inbound",inboundList);
-            dashboard();
+            inbound();
 
         }
     }
