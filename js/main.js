@@ -16,7 +16,12 @@ window.onload = function (event) {
         localStorage.setItem("inbound", "[]");
 
     }
-    
+
+    if(!localStorage.getItem("outbound")) {
+        localStorage.setItem("outbound", "[]");
+
+    }
+
     var status = localStorage.getItem("userStatus");
     changeNavigationBar(localStorage.getItem("userStatus"));
     if (status == "logged-in") {
