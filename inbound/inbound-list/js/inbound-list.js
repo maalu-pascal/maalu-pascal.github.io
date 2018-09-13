@@ -1,26 +1,26 @@
 function inbound() {
     containerContent('../inbound/inbound-list/html/inbound-list.html');
-    inboundList();
+    inboundOutboundList("inbound");
 }
 
-function inboundList() {
-    var inbound = localStorage.getItem("inbound");
-    inbound = JSON.parse(inbound);
+function inboundOutboundList(listName) {
+    var inventoryList = localStorage.getItem(listName);
+    inventoryList = JSON.parse(inventoryList);
 
     var newRow = document.getElementById("tableBody");
 
-    for (eachInbound in inbound) {
+    for (eachInventory in inventoryList) {
 
         var row = document.createElement("tr");
-        row.setAttribute("onclick","inboundProductList('"+inbound[eachInbound].name+"')");
+        row.setAttribute("onclick","inventoryProductList('"+inventoryList[eachInventory].name+"','"+listName+"')");
         
         var nameData = document.createElement("td");
-        var name = document.createTextNode(inbound[eachInbound].name);
+        var name = document.createTextNode(inventoryList[eachInventory].name);
         nameData.appendChild(name);
         row.appendChild(nameData);
 
         var dateData = document.createElement("td");
-        var date = document.createTextNode(inbound[eachInbound].date);
+        var date = document.createTextNode(inventoryList[eachInventory].date);
         dateData.appendChild(date);
         row.appendChild(dateData);
 

@@ -1,34 +1,32 @@
-function inboundProductList(name) {
-    containerContent('../inbound/inbound-product-list/html/inbound-product-list.html');
-    productList(name);
+function inventoryProductList(name, listName) {
+    containerContent('../'+listName+'/'+listName+'-product-list/html/'+listName+'-product-list.html');
+    productList(name, listName);
 }
 
-function productList(name) {
-    var inbound = localStorage.getItem("inbound");
-    inbound = JSON.parse(inbound);
+function productList(name, listName) {
+    var inventoryList = localStorage.getItem(listName);
+    inventoryList = JSON.parse(inventoryList);
 
-    for(newInbound in inbound) {
-        if(inbound[newInbound].name == name) {
+    for (eachInventory in inventoryList) {
+        if (inventoryList[eachInventory].name == name) {
 
-            document.getElementById("nameSpan").innerHTML = inbound[newInbound].name;
-            document.getElementById("dateSpan").innerHTML = inbound[newInbound].date;
+            document.getElementById("nameSpan").innerHTML = inventoryList[eachInventory].name;
+            document.getElementById("dateSpan").innerHTML = inventoryList[eachInventory].date;
 
-            for(category in inbound[newInbound].inbound) {
-                
-                for(items in inbound[newInbound].inbound[category]) {
+            for (category in inventoryList[eachInventory][listName]) {
+
+                for (items in inventoryList[eachInventory][listName][category]) {
                     if (category == "clothes") {
-                        for(item in inbound[newInbound].inbound[category][items]) {
-                            if (inbound[newInbound].inbound[category][items][item] != 0) {
-                                var quantity = inbound[newInbound].inbound[category][items][item];
-                                
-                                productRow(items+"-"+item,quantity);
+                        for (item in inventoryList[eachInventory][listName][category][items]) {
+                            if (inventoryList[eachInventory][listName][category][items][item] != 0) {
+                                var quantity = inventoryList[eachInventory][listName][category][items][item];
+                                productRow(items + "-" + item, quantity);
                             }
                         }
                     } else {
-                        if (inbound[newInbound].inbound[category][items] != 0) {
-                            var quantity = inbound[newInbound].inbound[category][items];
-                            productRow(items,quantity);
-
+                        if (inventoryList[eachInventory][listName][category][items] != 0) {
+                            var quantity = inventoryList[eachInventory][listName][category][items];
+                            productRow(items, quantity);
                         }
 
                     }
@@ -47,8 +45,8 @@ function productRow(item, quantity) {
     product.appendChild(itemData);
 
     var quantityData = document.createElement("td");
-    quantityData.setAttribute("class","itemQuantity");
-    var itemquantity = document.createTextNode(" : "+quantity+" nos.");
+    quantityData.setAttribute("class", "itemQuantity");
+    var itemquantity = document.createTextNode(" : " + quantity + " nos.");
     quantityData.appendChild(itemquantity);
     product.appendChild(quantityData);
 
