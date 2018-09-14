@@ -14,9 +14,8 @@ function createNewInventory(inventoryType) {
 function inventoryNewItem(inventoryType) {
     var error = validateNewItem(localStorage.getItem('last_val'), inventoryType);
     if (error) {
-        document.getElementById("newInventoryError").innerHTML= error;
+        document.getElementById("newInventoryError").innerHTML = error;
 
-        // alert(error);
     } else {
         createItem(inventoryType);
     }
@@ -58,6 +57,24 @@ function validateNewItem(inputItemNumber, inventoryType) {
                             error = `Quantity of ${itemName} available is ${currentStock.currentStock[category][item]}`;
                         }
                     }
+                } else {
+                    for (clothes in newInventoryObject.inventory[category][item]) {
+
+                        if (clothes == itemName) {
+                            itemFound = true;
+
+                            if (inventoryType == "outbound") {
+
+                                let currentStock = localStorage.getItem("stock");
+                                currentStock = JSON.parse(currentStock);
+                                if (currentStock.currentStock[category][item][clothes] < itemQuantity) {
+                                    error = `Quantity of ${itemName} available is ${currentStock.currentStock[category][item][clothes]}`;
+
+                                }
+
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -74,8 +91,7 @@ function newsubmitList(inventoryType) {
         error = "* Please enter centre name";
     }
     if (error) {
-        // alert(error);
-        document.getElementById("newInventoryError").innerHTML= error;
+        document.getElementById("newInventoryError").innerHTML = error;
 
     } else {
         var name = document.getElementById("inventoryName").value;
@@ -84,7 +100,7 @@ function newsubmitList(inventoryType) {
 
         let currentStock = localStorage.getItem("stock");
         currentStock = JSON.parse(currentStock);
-        
+
         for (id in itemName) {
             for (let category in newInventoryObject.inventory) {
                 for (let item in newInventoryObject.inventory[category]) {
@@ -92,18 +108,36 @@ function newsubmitList(inventoryType) {
                         console.log(item);
                         newInventoryObject.inventory[category][item] += parseInt(itemQuantity[id].value);
 
-                        if(inventoryType == "outbound") {
+                        if (inventoryType == "outbound") {
                             console.log(inventoryType);
                             console.log(currentStock.currentStock[category][item]);
-                            
-                            
+
+
                             currentStock.currentStock[category][item] -= parseInt(itemQuantity[id].value);
                         }
-                        if(inventoryType == "inbound") {
+                        if (inventoryType == "inbound") {
                             currentStock.currentStock[category][item] += parseInt(itemQuantity[id].value);
                         }
                         currentStock = JSON.stringify(currentStock);
-                        localStorage.setItem("stock",currentStock);
+                        localStorage.setItem("stock", currentStock);
+                    } else {
+                        for (clothes in newInventoryObject.inventory[category][item]) {
+
+                            if (clothes == itemName) {
+                                if (inventoryType == "outbound") {
+                                    console.log(inventoryType);
+                                    console.log(currentStock.currentStock[category][item]);
+
+
+                                    currentStock.currentStock[category][item][clothes] -= parseInt(itemQuantity[id].value);
+                                }
+                                if (inventoryType == "inbound") {
+                                    currentStock.currentStock[category][item][clothes] += parseInt(itemQuantity[id].value);
+                                }
+                            }
+                        }
+                        currentStock = JSON.stringify(currentStock);
+                        localStorage.setItem("stock", currentStock);
                     }
                 }
             }
@@ -127,3 +161,4 @@ function newsubmitList(inventoryType) {
     }
 
 }
+

@@ -23,9 +23,9 @@ function insertItem() {
     var selector = document.getElementById("selectors");
 
     var insertItems = document.createElement("div");
-    insertItems.setAttribute("id","selectOptions[" + itemNumber + "]");
-    insertItems.setAttribute("class","selectOptions");
-    
+    insertItems.setAttribute("id", "selectOptions[" + itemNumber + "]");
+    insertItems.setAttribute("class", "selectOptions");
+
     selector.appendChild(insertItems);
     selector.focus();
 
@@ -102,7 +102,7 @@ function selectSubCategoryItem(param) {
 
         var items = document.createElement("select");
         items.setAttribute("id", "selectSubCategoryItem[" + param + "]");
-        items.setAttribute("class", "selectSubCategoryItem");
+        items.setAttribute("class", "subCategoryItem");
         items.setAttribute("onchange", "quantity(" + param + ")");
         document.getElementById("selectOptions[" + param + "]").appendChild(items);
 
@@ -167,7 +167,7 @@ function submitList() {
     if (error) {
         alert(error);
     } else {
-        if(!document.getElementById("InboundName").value) {
+        if (!document.getElementById("InboundName").value) {
             alert("Please enter name!");
         } else {
             var name = document.getElementById("InboundName").value;
@@ -177,33 +177,45 @@ function submitList() {
             request.send(null);
             var newObject = request.responseText;
             newObject = JSON.parse(newObject);
-            
+
+            let currentStock = localStorage.getItem("stock");
+            currentStock = JSON.parse(currentStock);
+
             newObject.name = name;
             var date = new Date();
             newObject.date = date.toDateString();
-    
+
             var itemCategory = document.getElementsByClassName("selectCategory");
-            var itemSubCategoryItem = document.getElementsByClassName("selectSubCategoryItem");
+            var itemSubCategoryItem = document.getElementsByClassName("subCategoryItem");
             var itemName = document.getElementsByClassName("selectItem");
             var itemQuantity = document.getElementsByClassName("quantity");
-    
+            
+            
             for (id in itemCategory) {
                 if (itemCategory[id].value) {
-                    if(itemCategory[id].value == "clothes") {
-                        newObject.inbound[itemCategory[id].value][itemName[id].value][itemSubCategoryItem[id].value] += parseInt(itemQuantity[id].value);
+                    if (itemCategory[id].value == "clothes") {
+                        
+                        newObject.inventory[itemCategory[id].value][itemName[id].value][itemSubCategoryItem[id].value] += parseInt(itemQuantity[id].value);
+                        currentStock.currentStock[itemCategory[id].value][itemName[id].value][itemSubCategoryItem[id].value] += parseInt(itemQuantity[id].value);
+
                     } else {
-                        newObject.inbound[itemCategory[id].value][itemName[id].value] += parseInt(itemQuantity[id].value);
+                        newObject.inventory[itemCategory[id].value][itemName[id].value] += parseInt(itemQuantity[id].value);
+                        currentStock.currentStock[itemCategory[id].value][itemName[id].value] += parseInt(itemQuantity[id].value);
+
                     }
                 }
             }
 
+            currentStock = JSON.stringify(currentStock);
+            localStorage.setItem("stock", currentStock);
+
             var inboundList = localStorage.getItem("inbound");
             inboundList = JSON.parse(inboundList);
-    
+
             inboundList.push(newObject);
-    
+
             inboundList = JSON.stringify(inboundList);
-            localStorage.setItem("inbound",inboundList);
+            localStorage.setItem("inbound", inboundList);
             inbound();
 
         }

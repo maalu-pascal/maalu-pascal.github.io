@@ -18,18 +18,18 @@
         "clothes": {
             "men": {
                 "shirt": 0,
-                "bottom": 0,
-                "innerwear": 0
+                "pant": 0,
+                "innerwear men": 0
             },
             "women": {
                 "top": 0,
                 "bottom": 0,
-                "innerwear": 0
+                "innerwear women": 0
             },
             "kids": {
-                "top": 0,
-                "bottom": 0,
-                "innerwear": 0
+                "shirt kids": 0,
+                "bottom kids": 0,
+                "innerwear kids": 0
             }
         },
         "toiletries": {

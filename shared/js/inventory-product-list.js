@@ -4,29 +4,34 @@ function inventoryProductList(name, listName) {
 }
 
 function productList(name, listName) {
+    console.log("hi");
     var inventoryList = localStorage.getItem(listName);
     inventoryList = JSON.parse(inventoryList);
 
     for (eachInventory in inventoryList) {
+
         if (inventoryList[eachInventory].name == name) {
 
             document.getElementById("nameSpan").innerHTML = inventoryList[eachInventory].name;
             document.getElementById("dateSpan").innerHTML = inventoryList[eachInventory].date;
+            console.log(inventoryList[eachInventory].inventory);
+            
+            for (category in inventoryList[eachInventory].inventory) {
+                console.log(category);
 
-            for (category in inventoryList[eachInventory][listName]) {
-
-                for (items in inventoryList[eachInventory][listName][category]) {
+                for (items in inventoryList[eachInventory].inventory[category]) {
                     if (category == "clothes") {
-                        for (item in inventoryList[eachInventory][listName][category][items]) {
-                            if (inventoryList[eachInventory][listName][category][items][item] != 0) {
-                                var quantity = inventoryList[eachInventory][listName][category][items][item];
+                        for (item in inventoryList[eachInventory].inventory[category][items]) {
+                            if (inventoryList[eachInventory].inventory[category][items][item] != 0) {
+                                var quantity = inventoryList[eachInventory].inventory[category][items][item];
                                 productRow(items + "-" + item, quantity);
                             }
                         }
                     } else {
-                        if (inventoryList[eachInventory][listName][category][items] != 0) {
-                            var quantity = inventoryList[eachInventory][listName][category][items];
+                        if (inventoryList[eachInventory].inventory[category][items] != 0) {
+                            var quantity = inventoryList[eachInventory].inventory[category][items];
                             productRow(items, quantity);
+
                         }
 
                     }
