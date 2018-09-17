@@ -33,7 +33,7 @@ function loadChart() {
     }
 
     var inbound_food = calcucalateTotal('food', inboundList);
-    var inbound_toileteries = calcucalateTotal('toileteries', inboundList);
+    var inbound_toileteries = calcucalateTotal('toiletries', inboundList);
     var inbound_medicines = calcucalateTotal('medicines', inboundList);
 
     var inbound_clothes = 0;
@@ -49,7 +49,7 @@ function loadChart() {
     outboundList = JSON.parse(outboundList);
 
     var outbound_food = calcucalateTotal('food', outboundList);
-    var outbound_toileteries = calcucalateTotal('toileteries', outboundList);
+    var outbound_toileteries = calcucalateTotal('toiletries', outboundList);
     var outbound_medicines = calcucalateTotal('medicines', outboundList);
 
     var outbound_clothes = 0;
