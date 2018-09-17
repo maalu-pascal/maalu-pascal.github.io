@@ -111,7 +111,6 @@ function newsubmitList(inventoryType) {
 
                         if (inventoryType == "outbound") {
                             currentstock.currentStock[category][item] -= parseInt(itemQuantity[id].value);
-                            console.log(currentstock.currentStock[category][item]);
                         }
                         if (inventoryType == "inbound") {
                             currentstock.currentStock[category][item] += parseInt(itemQuantity[id].value);
@@ -135,7 +134,6 @@ function newsubmitList(inventoryType) {
                 }
             }
         }
-        console.log(currentstock);
 
         currentstock = JSON.stringify(currentstock);
         localStorage.setItem("stock", currentstock);
