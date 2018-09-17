@@ -6,22 +6,44 @@
     border-radius: 10px;
 }
 
-li{
+#currentStockTable #subcategory {
+    padding-left: 0;
+}
+
+#currentStockTable td {
+    border-collapse: collapse;
+    vertical-align: top;
+    padding: 15px;
+    border: 1px solid black;
+}
+
+.currentStockTable {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    border-collapse: collapse;
+    padding-left: 5%;
+}
+
+li {
     list-style: none;
+    margin: 0px;
+    padding: 0px;
 }
 
 ::-webkit-scrollbar {
     width: 20px;
 }
+
 :-webkit-scrollbar-track {
-    background: #f1f1f1; 
+    background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888; 
+    background: #888;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    background: #555;
     cursor: move;
 }
