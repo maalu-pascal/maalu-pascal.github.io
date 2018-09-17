@@ -1,25 +1,21 @@
-var itemNumber;
-
-function newInbound() {
-    containerContent('../inbound/new-inbound/html/new-inbound.html');
+function newInventory(inventoryType) {
+    containerContent('../' + inventoryType + '/new-' + inventoryType + '/html/new-' + inventoryType + '.html');
     localStorage.setItem('last_val', 0);
     itemNumber = 0;
-    insertItem();
+    inventoryInsertItem();
 }
 
-
-
-
-function newItem() {
-    var error = validate(localStorage.getItem('last_val'));
+function newInventoryItem(inventoryType) {      
+    var error = validate(localStorage.getItem('last_val'), inventoryType);
     if (error) {
         alert(error);
     } else {
-        insertItem();
+        inventoryInsertItem();
     }
-
+    console.log("inventory");
 }
-function insertItem() {
+
+function inventoryInsertItem() {
     var selector = document.getElementById("selectors");
 
     var insertItems = document.createElement("div");
@@ -37,7 +33,7 @@ function insertItem() {
     itemCategory.setAttribute("id", "selectCategory[" + itemNumber + "]");
     itemCategory.setAttribute("class", "selectCategory");
 
-    itemCategory.setAttribute("onchange", "selectItem(" + itemNumber + ")");
+    itemCategory.setAttribute("onchange", "inventorySelectItem(" + itemNumber + ")");
     document.getElementById("selectOptions[" + itemNumber + "]").appendChild(itemCategory);
 
     var option = document.createElement("option");
@@ -58,7 +54,7 @@ function insertItem() {
     itemNumber++;
 }
 
-function selectItem(param) {
+function inventorySelectItem(param) {
     var data = localStorage.getItem("stock");
     var stock = JSON.parse(data);
 
@@ -68,7 +64,7 @@ function selectItem(param) {
         var items = document.createElement("select");
         items.setAttribute("id", "selectItem[" + param + "]");
         items.setAttribute("class", "selectItem");
-        items.setAttribute("onchange", "selectSubCategoryItem(" + param + ")");
+        items.setAttribute("onchange", "inventorySelectSubCategoryItem(" + param + ")");
         document.getElementById("selectOptions[" + param + "]").appendChild(items);
 
     } else {
@@ -92,7 +88,7 @@ function selectItem(param) {
     }
 }
 
-function selectSubCategoryItem(param) {
+function inventorySelectSubCategoryItem(param) {
     var itemCategory = document.getElementById("selectCategory[" + param + "]").value;
     var subCategory = document.getElementById("selectItem[" + param + "]").value;
 
@@ -102,8 +98,8 @@ function selectSubCategoryItem(param) {
 
         var items = document.createElement("select");
         items.setAttribute("id", "selectSubCategoryItem[" + param + "]");
-        items.setAttribute("class", "subCategoryItem");
-        items.setAttribute("onchange", "quantity(" + param + ")");
+        items.setAttribute("class", "selectSubCategoryItem");
+        items.setAttribute("onchange", "inventoryQuantity(" + param + ")");
         document.getElementById("selectOptions[" + param + "]").appendChild(items);
 
         var option = document.createElement("option");
@@ -119,11 +115,11 @@ function selectSubCategoryItem(param) {
             items.appendChild(option);
         }
     } else {                //No sub-category.
-        quantity(param);
+        inventoryQuantity(param);
     }
 }
 
-function quantity(param) {
+function inventoryQuantity(param) {
     if (param == localStorage.getItem('last_val') && (!document.getElementById("quantity[" + param + "]"))) {
         var itemQuantity = document.createElement("input");
         itemQuantity.setAttribute("id", "quantity[" + param + "]");
@@ -134,7 +130,7 @@ function quantity(param) {
     }
 }
 
-function validate(param) {
+function validate(param, inventoryType) {
     var alert;
     if (document.getElementById("selectCategory[" + param + "]").value === "") {
         alert = "Please select category!";
@@ -157,20 +153,34 @@ function validate(param) {
             alert = "Please enter quantity!";
             document.getElementById("quantity[" + param + "]").focus();
 
+        } else {
+            if (inventoryType == "outbound") {
+
+                var currentStock = localStorage.getItem("stock");
+                currentStock = JSON.parse(currentStock);
+
+                var itemCategory = document.getElementById("selectCategory[" + param + "]").value;
+                var itemName = document.getElementById("selectItem[" + param + "]").value;
+                var requiredQuantity = document.getElementById("quantity[" + param + "]").value;
+                if (currentStock.currentStock[itemCategory][itemName] < requiredQuantity) {
+                    alert = itemName + " is low on stock!";
+                    document.getElementById("quantity[" + param + "]").focus();
+                }
+            }
         }
     }
     return alert;
 }
 
-function submitList() {
-    var error = validate(localStorage.getItem('last_val'));
+function submitList(inventoryType) {
+    var error = validate(localStorage.getItem('last_val'),inventoryType);
     if (error) {
         alert(error);
     } else {
-        if (!document.getElementById("InboundName").value) {
+        if (!document.getElementById(`${inventoryType}Name`).value) {
             alert("Please enter name!");
         } else {
-            var name = document.getElementById("InboundName").value;
+            var name = document.getElementById(`${inventoryType}Name`).value;
 
             var request = new XMLHttpRequest();
             request.open("GET", "../inbound/new-inbound/json/newInboundObject.json", false);
@@ -178,44 +188,32 @@ function submitList() {
             var newObject = request.responseText;
             newObject = JSON.parse(newObject);
 
-            let currentStock = localStorage.getItem("stock");
-            currentStock = JSON.parse(currentStock);
-
             newObject.name = name;
             var date = new Date();
             newObject.date = date.toDateString();
 
             var itemCategory = document.getElementsByClassName("selectCategory");
-            var itemSubCategoryItem = document.getElementsByClassName("subCategoryItem");
+            var itemSubCategoryItem = document.getElementsByClassName("selectSubCategoryItem");
             var itemName = document.getElementsByClassName("selectItem");
             var itemQuantity = document.getElementsByClassName("quantity");
-            
-            
+
             for (id in itemCategory) {
                 if (itemCategory[id].value) {
                     if (itemCategory[id].value == "clothes") {
-                        
-                        newObject.inventory[itemCategory[id].value][itemName[id].value][itemSubCategoryItem[id].value] += parseInt(itemQuantity[id].value);
-                        currentStock.currentStock[itemCategory[id].value][itemName[id].value][itemSubCategoryItem[id].value] += parseInt(itemQuantity[id].value);
-
-                    } else {
+                        newObject[inventoryType][itemCategory[id].value][itemName[id].value][itemSubCategoryItem[id].value] += parseInt(itemQuantity[id].value);
+                    } else {                        
                         newObject.inventory[itemCategory[id].value][itemName[id].value] += parseInt(itemQuantity[id].value);
-                        currentStock.currentStock[itemCategory[id].value][itemName[id].value] += parseInt(itemQuantity[id].value);
-
                     }
                 }
             }
 
-            currentStock = JSON.stringify(currentStock);
-            localStorage.setItem("stock", currentStock);
+            var inventoryList = localStorage.getItem(inventoryType);
+            inventoryList = JSON.parse(inventoryList);
 
-            var inboundList = localStorage.getItem("inbound");
-            inboundList = JSON.parse(inboundList);
+            inventoryList.push(newObject);
 
-            inboundList.push(newObject);
-
-            inboundList = JSON.stringify(inboundList);
-            localStorage.setItem("inbound", inboundList);
+            inventoryList = JSON.stringify(inventoryList);
+            localStorage.setItem("inbound", inventoryList);
             inbound();
 
         }
