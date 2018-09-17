@@ -1,3 +1,7 @@
+function loginPage() {
+    containerContent('../login/html/login.html');
+    checkSubmit();
+}
 function submitUser() {
     var userName = document.getElementById("username").value;
     var userPassword = document.getElementById("userpassword").value;
@@ -26,5 +30,21 @@ function submitUser() {
             }).catch(err => console.error(err));
 
     }
+}
+function login() {
+    localStorage.setItem("userStatus", "logged-in");
+    changeNavigationBar('logged-in');
+    dashboard();
+}
+
+function checkSubmit(e) {
+    var input = document.getElementById("userpassword");
+    input.addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            document.getElementById("submit").click();
+            submitUser();
+        }
+    });
 
 }
