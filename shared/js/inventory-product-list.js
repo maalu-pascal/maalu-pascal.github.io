@@ -1,11 +1,10 @@
-function inventoryProductList(name, listName) {
-    containerContent('../'+listName+'/'+listName+'-product-list/html/'+listName+'-product-list.html');
-    productList(name, listName);
+function inventoryProductList(name, inventoryListName) {
+    containerContent('../'+inventoryListName+'/'+inventoryListName+'-product-list/html/'+inventoryListName+'-product-list.html');
+    productList(name, inventoryListName);
 }
 
-function productList(name, listName) {
-    console.log("hi");
-    var inventoryList = localStorage.getItem(listName);
+function productList(name, inventoryListName) {
+    var inventoryList = localStorage.getItem(inventoryListName);
     inventoryList = JSON.parse(inventoryList);
 
     for (eachInventory in inventoryList) {
@@ -14,17 +13,15 @@ function productList(name, listName) {
 
             document.getElementById("nameSpan").innerHTML = inventoryList[eachInventory].name;
             document.getElementById("dateSpan").innerHTML = inventoryList[eachInventory].date;
-            console.log(inventoryList[eachInventory].inventory);
             
             for (category in inventoryList[eachInventory].inventory) {
-                console.log(category);
 
                 for (items in inventoryList[eachInventory].inventory[category]) {
                     if (category == "clothes") {
                         for (item in inventoryList[eachInventory].inventory[category][items]) {
                             if (inventoryList[eachInventory].inventory[category][items][item] != 0) {
                                 var quantity = inventoryList[eachInventory].inventory[category][items][item];
-                                productRow(items + "-" + item, quantity);
+                                productRow(item, quantity);
                             }
                         }
                     } else {
@@ -44,6 +41,7 @@ function productList(name, listName) {
 
 function productRow(item, quantity) {
     var product = document.createElement("tr");
+
     var itemData = document.createElement("td");
     var itemName = document.createTextNode(item);
     itemData.appendChild(itemName);

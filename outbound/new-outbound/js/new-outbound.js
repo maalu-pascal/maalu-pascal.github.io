@@ -10,14 +10,14 @@ function newOutbound(inventoryType) {
 
 //common
 
-function inventoryNewItem(inventoryType) {      
+function newInventoryItem(inventoryType) {      
     var error = validate(localStorage.getItem('last_val'), inventoryType);
     if (error) {
         alert(error);
     } else {
         inventoryInsertItem();
     }
-
+    console.log("inventory");
 }
 
 function inventoryInsertItem() {
@@ -182,10 +182,10 @@ function submitList(inventoryType) {
     if (error) {
         alert(error);
     } else {
-        if (!document.getElementById("inventoryName").value) {
+        if (!document.getElementById(`${inventoryType}Name`).value) {
             alert("Please enter name!");
         } else {
-            var name = document.getElementById("inventoryName").value;
+            var name = document.getElementById(`${inventoryType}Name`).value;
 
             var request = new XMLHttpRequest();
             request.open("GET", "../inbound/new-inbound/json/newInboundObject.json", false);
@@ -206,8 +206,8 @@ function submitList(inventoryType) {
                 if (itemCategory[id].value) {
                     if (itemCategory[id].value == "clothes") {
                         newObject[inventoryType][itemCategory[id].value][itemName[id].value][itemSubCategoryItem[id].value] += parseInt(itemQuantity[id].value);
-                    } else {
-                        newObject[inventoryType][itemCategory[id].value][itemName[id].value] += parseInt(itemQuantity[id].value);
+                    } else {                        
+                        newObject.inventory[itemCategory[id].value][itemName[id].value] += parseInt(itemQuantity[id].value);
                     }
                 }
             }
