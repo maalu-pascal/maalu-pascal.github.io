@@ -50,12 +50,6 @@ function changeNavigationBar(status) {
     }
 }
 
-function login() {
-    localStorage.setItem("userStatus", "logged-in");
-    changeNavigationBar('logged-in');
-    dashboard();
-}
-
 function logout() {
     localStorage.setItem("userStatus", "logged-out");
     changeNavigationBar('logged-out');
