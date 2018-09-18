@@ -5,20 +5,9 @@ function inboundOutboundList(listName) {
     var newRow = document.getElementById("tableBody");
 
     for (eachInventory in inventoryList) {
-
-        var row = document.createElement("tr");
-        row.setAttribute("onclick", "inventoryProductList('" + inventoryList[eachInventory].name + "','" + listName + "')");
-
-        var nameData = document.createElement("td");
-        var name = document.createTextNode(inventoryList[eachInventory].name);
-        nameData.appendChild(name);
-        row.appendChild(nameData);
-
-        var dateData = document.createElement("td");
-        var date = document.createTextNode(inventoryList[eachInventory].date);
-        dateData.appendChild(date);
-        row.appendChild(dateData);
-
-        newRow.appendChild(row);
+        var row = `<tr onclick= "inventoryProductList('${inventoryList[eachInventory].name}','${listName}')">
+                   <td>${inventoryList[eachInventory].name}</td>
+                   <td>${inventoryList[eachInventory].date}</td> </tr>`;
+        newRow.insertAdjacentHTML("beforeend", row);
     }
 }
