@@ -1,18 +1,20 @@
-function inventoryProductList(name, inventoryListName) {
+function inventoryProductList(name, date, inventoryListName) {
     containerContent('../'+inventoryListName+'/'+inventoryListName+'-product-list/html/'+inventoryListName+'-product-list.html');
-    productList(name, inventoryListName);
+    productList(name, date,  inventoryListName);
 }
 
-function productList(name, inventoryListName) {
+function productList(name, date, inventoryListName) {
     let inventoryList = localStorage.getItem(inventoryListName);
     inventoryList = JSON.parse(inventoryList);
 
     for (eachInventory in inventoryList) {
 
-        if (inventoryList[eachInventory].name == name) {
+        if (inventoryList[eachInventory].name == name && inventoryList[eachInventory].date == date) {
 
+            var inventoryDate = new Date(inventoryList[eachInventory].date);
+            inventoryDate = inventoryDate.toDateString();
             document.getElementById("nameSpan").innerHTML = inventoryList[eachInventory].name;
-            document.getElementById("dateSpan").innerHTML = inventoryList[eachInventory].date;
+            document.getElementById("dateSpan").innerHTML = inventoryDate;
 
             for (category in inventoryList[eachInventory].inventory) {
                 for (items in inventoryList[eachInventory].inventory[category]) {

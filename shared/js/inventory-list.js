@@ -5,7 +5,7 @@ function inboundOutboundList(listName) {
     var newRow = document.getElementById("tableBody");
 
     for (eachInventory in inventoryList) {
-        var row = `<tr onclick= "inventoryProductList('${inventoryList[eachInventory].name}','${listName}')">
+        var row = `<tr onclick= "inventoryProductList('${inventoryList[eachInventory].name}','${inventoryList[eachInventory].date}','${listName}')">
                    <td>${inventoryList[eachInventory].name}</td>
                    <td>${inventoryList[eachInventory].date}</td> </tr>`;
         newRow.insertAdjacentHTML("beforeend", row);
