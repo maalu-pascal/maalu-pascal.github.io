@@ -1,11 +1,12 @@
 <div class="container">
     <div class="newInboundContainer">
         <div class="form">
-            <input type="text" id="inboundName" class="InboundName" placeholder="Enter name">
-            <button type="button" id="submitList" onclick="submitList('inbound')">Submit</button>
+            <input type="text" id="newinboundName" class="inventoryName" placeholder="Enter name">
+            <button type="button" id="submitList" onclick="newsubmitList('inbound')">Submit</button>
         </div>
         <div>
-            <button type="button" id="insertItem" onclick="newInventoryItem('inbound')">&ensp;+&ensp; </button>
+            <span id="newInventoryError"></span>
+            <button type="button" id="insertItem" onclick="inventoryNewItem('inbound')">&ensp;+&ensp; </button>
         </div>
 
         <div class="selectors" id="selectors"></div>

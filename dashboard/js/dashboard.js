@@ -9,7 +9,7 @@ function loadChart() {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
     var current_food = Object.values(stock.currentStock.food).reduce(reducer);
-    var current_medicines = Object.values(stock.currentStock.medicine).reduce(reducer);
+    var current_medicines = Object.values(stock.currentStock.medicines).reduce(reducer);
     var current_toiletries = Object.values(stock.currentStock.toiletries).reduce(reducer);
     var current_clothes = 0;
     for (item in stock.currentStock.clothes) {

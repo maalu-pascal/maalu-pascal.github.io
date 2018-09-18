@@ -93,14 +93,16 @@ function validateNewItem(inputItemNumber, inventoryType) {
 
 function newsubmitList(inventoryType) {
     var error = validateNewItem(localStorage.getItem('last_val'), inventoryType);
-    if (!document.getElementById("inventoryName")) {
-        error = "* Please enter centre name";
+    if (!document.getElementById(`new${inventoryType}Name`).value) {
+        error = "* Please enter name";
     }
     if (error) {
         document.getElementById("newInventoryError").innerHTML = error;
 
     } else {
-        var name = document.getElementById("inventoryName").value;
+        var name = document.getElementById(`new${inventoryType}Name`).value;
+        console.log(name);
+        
         var itemName = document.getElementsByClassName("item");
         var itemQuantity = document.getElementsByClassName("quantity");
 
