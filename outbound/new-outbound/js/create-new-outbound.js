@@ -43,6 +43,8 @@ function validateNewItem(inputItemNumber, inventoryType) {
         error = "* Please enter item";
     } else if (itemQuantity == "") {
         error = "* Please enter quantity";
+    } else if(!Number.isInteger(parseInt(itemQuantity))) {
+        error = "* Quantity should be a number";
     } else {
         let itemFound = false;
         for (let category in newInventoryObject.inventory) {
