@@ -25,17 +25,6 @@ function nav(status) {
     }
 }
 
-function login() {
-    localStorage.setItem("userStatus", "logged-in");
-    nav('logged-in');
-    containerContent('../dashboard/html/dashboard.html');
-}
-
-function logout() {
-    localStorage.setItem("userStatus", "logged-out");
-    nav('logged-out');
-    containerContent('../login/html/login.html')
-}
 function containerContent(url) {
     req = new XMLHttpRequest();
     req.open("GET", url, false);
