@@ -10,7 +10,6 @@ function submitUser() {
     if (userName == "" || userPassword == "") {
         errorMessage = "*Please enter username/password";
         document.getElementById("errorMessage").innerHTML = errorMessage;
-
     } else {
         fetch('../login/json/login.json')
             .then(res => res.json())
@@ -26,15 +25,14 @@ function submitUser() {
                     errorMessage = "*Invalid username/password";
                     document.getElementById("errorMessage").innerHTML = errorMessage;
                 }
-
             }).catch(err => console.error(err));
-
     }
 }
+
 function login() {
     localStorage.setItem("userStatus", "logged-in");
-    changeNavigationBar('logged-in');
-    dashboard();
+    nav('logged-in');
+    containerContent('../dashboard/html/dashboard.html');
 }
 
 function checkSubmit(e) {
@@ -47,4 +45,10 @@ function checkSubmit(e) {
         }
     });
 
+}
+
+function logout() {
+    localStorage.setItem("userStatus", "logged-out");
+    nav('logged-out');
+    containerContent('../login/html/login.html')
 }

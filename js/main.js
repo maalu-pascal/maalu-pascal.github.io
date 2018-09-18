@@ -50,12 +50,6 @@ function changeNavigationBar(status) {
     }
 }
 
-function logout() {
-    localStorage.setItem("userStatus", "logged-out");
-    changeNavigationBar('logged-out');
-    containerContent('../login/html/login.html')
-}
-
 function containerContent(url) {
     req = new XMLHttpRequest();
     req.open("GET", url, false);
