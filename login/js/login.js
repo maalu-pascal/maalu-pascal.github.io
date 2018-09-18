@@ -28,11 +28,10 @@ function submitUser() {
             }).catch(err => console.error(err));
     }
 }
-
 function login() {
     localStorage.setItem("userStatus", "logged-in");
-    nav('logged-in');
-    containerContent('../dashboard/html/dashboard.html');
+    changeNavigationBar('logged-in');
+    dashboard();
 }
 
 function checkSubmit(e) {
@@ -49,6 +48,6 @@ function checkSubmit(e) {
 
 function logout() {
     localStorage.setItem("userStatus", "logged-out");
-    nav('logged-out');
+    changeNavigationBar('logged-out');
     containerContent('../login/html/login.html')
 }
