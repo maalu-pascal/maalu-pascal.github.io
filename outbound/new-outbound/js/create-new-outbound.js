@@ -1,13 +1,16 @@
 var newInventoryObject;
+
 function createNewInventory(inventoryType) {
     containerContent('../' + inventoryType + '/new-' + inventoryType + '/html/new-' + inventoryType + '.html');
     localStorage.setItem('last_val', 0);
     itemNumber = 0;
+
     var request = new XMLHttpRequest();
-    request.open("GET", `../${inventoryType}/new-${inventoryType}/json/new-${inventoryType}.json`, false);
+    request.open("GET", `../shared/json/new-inventory.json`, false);
     request.send(null);
     newInventoryObject = request.responseText;
     newInventoryObject = JSON.parse(newInventoryObject);
+
     createItem(inventoryType);
 }
 
@@ -28,7 +31,6 @@ function createItem(inventoryType) {
                         <input type='text' id= quantity[${itemNumber}] class= 'quantity' placeholder = "Enter quantity"></input> </div>`;
     itemdiv.insertAdjacentHTML("beforeend", itemDivData);
 
-
     localStorage.setItem('last_val', itemNumber);
     itemNumber++;
 
@@ -37,13 +39,13 @@ function createItem(inventoryType) {
 function validateNewItem(inputItemNumber, inventoryType) {
     var error;
     var itemName = document.getElementById(`item[${inputItemNumber}]`).value;
-    var itemQuantity = document.getElementById("quantity[" + inputItemNumber + "]").value;
+    var itemQuantity = document.getElementById(`quantity[${inputItemNumber}]`).value;
 
     if (itemName == "") {
         error = "* Please enter item";
     } else if (itemQuantity == "") {
         error = "* Please enter quantity";
-    } else if(!Number.isInteger(parseInt(itemQuantity))) {
+    } else if (!Number.isInteger(parseInt(itemQuantity))) {
         error = "* Quantity should be a number";
     } else {
         let itemFound = false;
@@ -152,8 +154,6 @@ function newsubmitList(inventoryType) {
         inventoryList = JSON.stringify(inventoryList);
         localStorage.setItem(inventoryType, inventoryList);
         window[inventoryType]();
-
     }
-
 }
 
