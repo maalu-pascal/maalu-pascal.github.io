@@ -1,0 +1,49 @@
+#newInventoryError {
+    color: rgb(163, 3, 3);
+}
+
+.newItemInputs {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    height:100%;
+}
+
+.newItemInputs input{
+    margin-bottom: 10px;
+    height: 25px;
+    border-radius: 4px;
+
+}
+
+.newInventoryContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.newInventoryContainer button {
+    background: rgb(102, 102, 102);
+    background: whitesmoke;
+    color: black;
+    border-radius: 5px;
+}
+
+.form input {
+    width: 20%;
+    min-width: 100px;
+    padding: 1%;
+    height: 25px;
+    border-radius: 10px;
+}
+
+.form {
+    margin: 5px;
+}
+
+#insertItem {
+    float: right;
+    border-radius: 40px;
+    font-weight: bold;
+    font-size: 20px;
+}

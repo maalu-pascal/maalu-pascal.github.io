@@ -25,7 +25,7 @@ function inventoryNewItem(inventoryType) {
 }
 
 function createItem(inventoryType) {
-    var itemdiv = document.getElementById("selectors");
+    var itemdiv = document.getElementById("newItemInputs");
     var itemDivData = `<div id = itemDiv[${itemNumber}] class= itemDiv[${itemNumber}]>
                         <input type='text' id= item[${itemNumber}] class='item' placeholder = "Enter Item"></input> 
                         <input type='text' id= quantity[${itemNumber}] class= 'quantity' placeholder = "Enter quantity"></input> </div>`;
@@ -145,8 +145,8 @@ function newsubmitList(inventoryType) {
         localStorage.setItem("stock", currentstock);
 
         newInventoryObject.name = name;
-        var date = new Date();
-        newInventoryObject.date = date.toDateString();
+        newInventoryObject.date = new Date();
+
 
         let inventoryList = localStorage.getItem(inventoryType);
         inventoryList = JSON.parse(inventoryList);
