@@ -1,6 +1,6 @@
 #nameSpan, #dateSpan, .itemQuantity {
     margin-left: 20px;
-    color: black;
+    color: #0a0808;
 }
 
 .back {
@@ -32,14 +32,13 @@
 
 .productList {
     width: 40%;
-    margin : 0% 20% 0% 20%;
     min-width: 350px;
     min-height:150px;
-    background-color: #c2c2c2;
+    text-transform: capitalize;
     border-radius: 10px;
     padding: 30px;
     opacity: 1;
-    color: #313131;
+    color: #000000;
     float: inherit;
     overflow: auto;
 }

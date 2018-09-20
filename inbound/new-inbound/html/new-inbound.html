@@ -1,14 +1,15 @@
-<div class="container">
+<section class="container">
     <div class="newInventoryContainer">
+        <h1 align="center"> New Inbound</h1>
         <div class="form">
-            <input type="text" id="newinboundName" class="inventoryName" placeholder="Enter name">
+                <span>Enter Name : </span><input type="text" id="newinboundName" class="inventoryName" placeholder="Enter name">
             <button type="button" id="submitList" onclick="newsubmitList('inbound')">Submit</button>
         </div>
-        <div>
+        <span class = "newItemHeading" >Enter item name and quantity required :</span>
+        <div class="itemInputs">
             <span id="newInventoryError"></span>
-            <button type="button" id="insertItem" onclick="inventoryNewItem('inbound')">&ensp;+&ensp; </button>
+            <div class="newItemInputs" id="newItemInputs"></div>
+            <button type="button" class="modifyItem" onclick="inventoryNewItem('inbound')">&ensp;Add Item &ensp; </button>
         </div>
-
-        <div class="newItemInputs" id="newItemInputs"></div>
     </div>
-</div>
+</section>>

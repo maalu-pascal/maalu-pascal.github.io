@@ -4,8 +4,6 @@
     margin-top: 10px;
     font-family: serif;
     background-color: #dfdfdf;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
     border-top-color: #a5a5a5;
 }
 
@@ -50,6 +48,7 @@
 
 .tableBody tr {
     background-color: #999999;
+    border-bottom: #2c2c2c;
 }
 
 .inboundTable td {

@@ -28,12 +28,18 @@ function createItem(inventoryType) {
     var itemdiv = document.getElementById("newItemInputs");
     var itemDivData = `<div id = itemDiv[${itemNumber}] class= itemDiv[${itemNumber}]>
                         <input type='text' id= item[${itemNumber}] class='item' placeholder = "Enter Item"></input> 
-                        <input type='text' id= quantity[${itemNumber}] class= 'quantity' placeholder = "Enter quantity"></input> </div>`;
+                        <input type='text' id= quantity[${itemNumber}] class= 'quantity' placeholder = "Enter quantity"></input> 
+                        <button type="button" class="modifyItem" onclick="deleteItem('${itemNumber}')"> Delete </button>
+                        </div>`;
     itemdiv.insertAdjacentHTML("beforeend", itemDivData);
 
     localStorage.setItem('last_val', itemNumber);
     itemNumber++;
 
+}
+function deleteItem(id) {
+    let div = document.getElementById(`itemDiv[${id}]`);
+    div.parentNode.removeChild(div);
 }
 
 function validateNewItem(inputItemNumber, inventoryType) {
@@ -101,7 +107,6 @@ function newsubmitList(inventoryType) {
 
     } else {
         var name = document.getElementById(`new${inventoryType}Name`).value;
-        console.log(name);
         
         var itemName = document.getElementsByClassName("item");
         var itemQuantity = document.getElementsByClassName("quantity");
