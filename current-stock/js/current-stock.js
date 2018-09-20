@@ -8,25 +8,25 @@ function displayCurrentStock() {
     var data = localStorage.getItem("stock");
     var stock = JSON.parse(data);
     var table = document.getElementById("currentStockTable");
+
+    var toCapital = (word) => word[0].toUpperCase()+word.substr(1, word.length);
+
     for (category in stock.currentStock) {
-
-        var row = `<tr><td><h4>${category} : </h4></td><td><ul>`;
+        var row = table.insertRow();
+        row.insertCell(0).innerHTML = `<h4>${toCapital(category)} : </h4>`;
+        let items="";
         for (item in stock.currentStock[category]) {
-
             if (typeof (stock.currentStock[category][item]) == "object") {
-
-                row += `<ul id = 'subcategory'> <li>${item} : <ul>`;
+                items += `<ul id = 'subcategory'> <li>${toCapital(item)} : <ul>`;
                 for (subcategory in stock.currentStock[category][item]) {
-                    row += `<li> ${subcategory} : ${stock.currentStock[category][item][subcategory]}</li>`;
+                    items += `<li> ${toCapital(subcategory)} : ${stock.currentStock[category][item][subcategory]}</li>`;
                 }
-                row += "</ul></li></ul>";
+                items += "</ul></li></ul>";
             } else {
-                row += `<li> ${item} : ${stock.currentStock[category][item]} </li>`;
+                items += `<li> ${toCapital(item)} : ${stock.currentStock[category][item]} </li>`;
             }
         }
-        row += `</li></ul></tr>`;
-        table.innerHTML += row;
-
+        items += `</li></ul>`;
+        row.insertCell(1).innerHTML = items;
     }
-
 }

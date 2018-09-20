@@ -1,3 +1,8 @@
+function dashboard() {
+    containerContent('../dashboard/html/dashboard.html');
+    loadChart();
+}
+
 function loadChart() {
     var ctx = document.getElementById("myChart").getContext('2d');
 
@@ -19,7 +24,7 @@ function loadChart() {
     //Calculating the total number of inbound - food, medicine,clothes and toiletries.
     var inboundList = localStorage.getItem("inbound");
     inboundList = JSON.parse(inboundList);
-    
+
     function calcucalateTotal(category, inventoryList) {
         const reducer = (accumulator, currentValue) => accumulator + currentValue;
         var inventory_category = 0;
@@ -38,7 +43,7 @@ function loadChart() {
 
     var inbound_clothes = 0;
     clothesInbound = inboundList.map(inboundList => inboundList.inventory.clothes);
-    for (inventorycategory of clothesInbound) {        
+    for (inventorycategory of clothesInbound) {
         for (subcategory in inventorycategory) {
             inbound_clothes += parseInt(Object.values(inventorycategory[subcategory]).reduce(reducer));
         }
@@ -54,7 +59,7 @@ function loadChart() {
 
     var outbound_clothes = 0;
     clothesInbound = outboundList.map(outboundList => outboundList.inventory.clothes);
-    for (inventorycategory of clothesInbound) {        
+    for (inventorycategory of clothesInbound) {
         for (subcategory in inventorycategory) {
             inbound_clothes += parseInt(Object.values(inventorycategory[subcategory]).reduce(reducer));
         }
