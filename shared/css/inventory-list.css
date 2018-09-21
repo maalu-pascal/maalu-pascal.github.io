@@ -1,27 +1,25 @@
-.inboundListDiv h1 {
-    margin: 0px;
-    padding: 5px;
-    margin-top: 10px;
-    font-family: serif;
-    background-color: #dfdfdf;
-    border-top-color: #a5a5a5;
-}
-
-.inboundTable {
-    width: 100%;
-    border: 3px solid #a5a5a5;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-}
-
-.inboundListDiv {
+.inventoryListDiv {
     overflow: scroll;
     height: 100%;
 }
 
-.newInbound {
+.inventoryListDiv h1 {
+    margin: 0px;
+    padding: 5px;
+    margin-top: 10px;
+    font-family: serif;
+}
+
+.inventoryTable {
+    width: 100%;
+    border-bottom-left-radius: 3px;
+    border-collapse: collapse;
+    border-bottom-right-radius: 3px;
+}
+
+.newInventory {
     border-radius: 5px;
-    margin: 10px;
+    margin: 10px 0 10px 0;
     float: left;
     background: #cecdcd;
     height: 25px;
@@ -29,19 +27,20 @@
     color: #2c2c2c;
 }
 
-.newInbound:hover {
+.newInventory:hover {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
     background: whitesmoke;
     color: black;
 }
 
-.tableBody tr, .inboundTable th {
+.tableBody tr, .inventoryTable th {
     padding: 8px;
     border-collapse: collapse;
+    border: 1px solid #202020;
     font-family: sans-serif;
 }
 
-.inboundTable th {
+.inventoryTable th {
     background-color: #b4b4b4;
     text-align: center;
 }
@@ -51,9 +50,10 @@
     border-bottom: #2c2c2c;
 }
 
-.inboundTable td {
+.inventoryTable td {
     padding: 5px;
     padding-left: 5%;
+    border: 1px solid #202020;
 }
 
 .tableBody tr:hover {

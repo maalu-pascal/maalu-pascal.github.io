@@ -1,6 +1,7 @@
 <section class="container">
     <div class="newInventoryContainer">
         <h1 align="center"> New Outbound</h1>
+        <button type="button" id="back" class="back" onclick="outbound()">Back</button>
         <div class="form">
             <span>Enter Centre Name : </span><input type="text" id="newoutboundName" class="inventoryName" placeholder="Enter centre name">
             <button type="button" id="submitList" onclick="newsubmitList('outbound')">Submit</button>
@@ -9,7 +10,7 @@
         <div class="itemInputs">
             <span id="newInventoryError"></span>
             <div class="newItemInputs" id="newItemInputs"></div>
-            <button type="button" class="modifyItem" onclick="inventoryNewItem('outbound')">&ensp;Add Item&ensp; </button>
+            <button type="button" class="addItem" onclick="inventoryNewItem('outbound')">&ensp;Add Item&ensp; </button>
         </div>
     </div>
 </section>

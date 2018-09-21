@@ -1,4 +1,7 @@
 var newInventoryObject;
+var allItemList = [];
+
+
 
 function createNewInventory(inventoryType) {
     containerContent('../' + inventoryType + '/new-' + inventoryType + '/html/new-' + inventoryType + '.html');
@@ -26,17 +29,34 @@ function inventoryNewItem(inventoryType) {
 
 function createItem(inventoryType) {
     var itemdiv = document.getElementById("newItemInputs");
-    var itemDivData = `<div id = itemDiv[${itemNumber}] class= itemDiv[${itemNumber}]>
-                        <input type='text' id= item[${itemNumber}] class='item' placeholder = "Enter Item"></input> 
-                        <input type='text' id= quantity[${itemNumber}] class= 'quantity' placeholder = "Enter quantity"></input> 
-                        <button type="button" class="modifyItem" onclick="deleteItem('${itemNumber}')"> Delete </button>
+    var itemDivData = `<div id = itemDiv[${itemNumber}] class= itemDiv>
+                        <div class = "itemInputField"><input type='text' list="itemsList${itemNumber}" id= item[${itemNumber}] class='item' placeholder = "Enter Item" ></input>
+                        <datalist id="itemsList${itemNumber}"></datalist></div>
+                        <div><input type='text' id= quantity[${itemNumber}] class= 'quantity' placeholder = "Enter quantity"></input></div> 
+                        <button type="button" id = "deleteButton" class="deleteItem" onclick="deleteItem('${itemNumber}')"> Delete </button>
                         </div>`;
     itemdiv.insertAdjacentHTML("beforeend", itemDivData);
+    var data = localStorage.getItem("stock");
+    var stock = JSON.parse(data);
+    let dataList = document.getElementById(`itemsList${itemNumber}`);
 
+    for (let category in stock.currentStock) {
+        for (let item in stock.currentStock[category]) {
+            if (category == "clothes") {
+                for (let clothes in stock.currentStock[category][item]) {
+                    console.log(`<option value=${clothes}></option>`);
+                    dataList.innerHTML += `<option value=${clothes}></option>`;
+                }
+            } else {
+                dataList.innerHTML += `<option value=${item}></option>`;
+            }
+        }
+    }
     localStorage.setItem('last_val', itemNumber);
     itemNumber++;
 
 }
+
 function deleteItem(id) {
     let div = document.getElementById(`itemDiv[${id}]`);
     div.parentNode.removeChild(div);
@@ -107,7 +127,7 @@ function newsubmitList(inventoryType) {
 
     } else {
         var name = document.getElementById(`new${inventoryType}Name`).value;
-        
+
         var itemName = document.getElementsByClassName("item");
         var itemQuantity = document.getElementsByClassName("quantity");
 
@@ -156,7 +176,7 @@ function newsubmitList(inventoryType) {
         let inventoryList = localStorage.getItem(inventoryType);
         inventoryList = JSON.parse(inventoryList);
 
-        inventoryList.push(newInventoryObject);
+        inventoryList.unshift(newInventoryObject);
 
         inventoryList = JSON.stringify(inventoryList);
         localStorage.setItem(inventoryType, inventoryList);

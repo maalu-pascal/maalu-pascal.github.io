@@ -1,3 +1,22 @@
+.newInventoryContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.newInventoryContainer button {
+    background: rgb(102, 102, 102);
+    background: whitesmoke;
+    color: black;
+    border-radius: 5px;
+    height: 30px;
+}
+
+.newInventoryContainer #back {
+    float: right;
+}
+
 #newInventoryError {
     color: rgb(163, 3, 3);
 }
@@ -7,10 +26,31 @@
     flex-direction: column;
 }
 
+.itemDiv {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.itemDiv input {
+    margin-right: 10px;
+}
+
+.addItem {
+    margin: 0;
+}
+
+.deleteItem {
+    margin-left: 10px;
+}
+
+.itemInputField {
+    overflow: visible;
+}
+
 .itemInputs {
     overflow: scroll;
     height: 100%;
-    padding: 10px;
+    padding: 5px;
 }
 
 .newItemHeading {
@@ -19,22 +59,8 @@
 }
 
 .newItemInputs input {
-    margin-bottom: 10px;
     height: 25px;
     border-radius: 4px;
-}
-
-.newInventoryContainer {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.newInventoryContainer button {
-    background: rgb(102, 102, 102);
-    background: whitesmoke;
-    color: black;
-    border-radius: 5px;
 }
 
 .form input {
@@ -47,12 +73,4 @@
 
 .form {
     margin: 5px;
-}
-
-.modifyItem {
-    /* float: right; */
-    margin-left: 20px;
-    border-radius: 40px;
-    /* font-weight: bold; */
-    /* font-size: 20px; */
 }
