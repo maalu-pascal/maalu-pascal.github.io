@@ -12,16 +12,21 @@
 
 .heading {
     display: flex;
-    height: 20%;
-    align-items: center;
+    /* height: 20%; */
+    /* align-items: center; */
+    font-size: 20px;
+    justify-content: center;
+}
+.heading h1 {
+    font-family: serif;
 }
 
 .chart-container {
     opacity: 1;
-    height: 70%;
+    /* height: 70%; */
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 
 canvas {

@@ -25,7 +25,7 @@
 }
 
 .productList {
-    width: 40%;
+    width: 92%;
     min-width: 350px;
     min-height:150px;
     text-transform: capitalize;
@@ -35,6 +35,10 @@
     color: #000000;
     float: inherit;
     overflow: auto;
+}
+
+.productList #back {
+    float: right;
 }
 
 .products {

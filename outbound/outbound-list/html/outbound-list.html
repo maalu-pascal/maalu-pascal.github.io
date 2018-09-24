@@ -1,8 +1,10 @@
 <div class="container">
     <div class="inventoryListDiv">
         <h1 align="center">OUTBOUND</h1>
-
         <div>
+            <button type="button" class="newInventoryButton" id="newInventory" onclick="createNewInventory('outbound')">New Outbound</button>
+        </div>
+        <div class = "inboundList">
             <table id="inventoryTable" class="inventoryTable">
                 <thead>
                     <tr>
@@ -15,8 +17,6 @@
             </table>
         </div>
 
-        <div>
-            <button type="button" class="newInventory" id="newInventory" onclick="createNewInventory('outbound')">New Outbound</button>
-        </div>
+
     </div>
 </div>

@@ -1,5 +1,5 @@
 #currentStockData {
-    height: 89%;
+    height: 93%;
     overflow: scroll;
 }
 
@@ -9,14 +9,15 @@
     padding: 6px;
     margin-top: 10px;
     font-family: serif;
-    background-color: #dfdfdf;
+    /* background-color: #dfdfdf; */
     border-top-color: #a5a5a5;
 }
 
 .currentStockTable {
     display: flex;
     border-collapse: collapse;
-    border: solid #a5a5a5;
+    /* border: solid #a5a5a5; */
+    border: 1px solid black;
     text-transform: capitalize;
 }
 
@@ -52,7 +53,8 @@ li {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    /* background: #888; */
+    background: #555;
 }
 
 ::-webkit-scrollbar-thumb:hover {

@@ -1,7 +1,4 @@
 var newInventoryObject;
-var allItemList = [];
-
-
 
 function createNewInventory(inventoryType) {
     containerContent('../' + inventoryType + '/new-' + inventoryType + '/html/new-' + inventoryType + '.html');
@@ -17,22 +14,12 @@ function createNewInventory(inventoryType) {
     createItem(inventoryType);
 }
 
-function inventoryNewItem(inventoryType) {
-    var error = validateNewItem(localStorage.getItem('last_val'), inventoryType);
-    if (error) {
-        document.getElementById("newInventoryError").innerHTML = error;
-
-    } else {
-        createItem(inventoryType);
-    }
-}
-
 function createItem(inventoryType) {
     var itemdiv = document.getElementById("newItemInputs");
     var itemDivData = `<div id = itemDiv[${itemNumber}] class= itemDiv>
                         <div class = "itemInputField"><input type='text' list="itemsList${itemNumber}" id= item[${itemNumber}] class='item' placeholder = "Enter Item" ></input>
                         <datalist id="itemsList${itemNumber}"></datalist></div>
-                        <div><input type='text' id= quantity[${itemNumber}] class= 'quantity' placeholder = "Enter quantity"></input></div> 
+                        <div><input type='number' id= quantity[${itemNumber}] class= 'quantity' placeholder = "Enter quantity"></input></div> 
                         <button type="button" id = "deleteButton" class="deleteItem" onclick="deleteItem('${itemNumber}')"> Delete </button>
                         </div>`;
     itemdiv.insertAdjacentHTML("beforeend", itemDivData);
@@ -40,11 +27,11 @@ function createItem(inventoryType) {
     var stock = JSON.parse(data);
     let dataList = document.getElementById(`itemsList${itemNumber}`);
 
+    //Populating the datalist. 
     for (let category in stock.currentStock) {
         for (let item in stock.currentStock[category]) {
             if (category == "clothes") {
                 for (let clothes in stock.currentStock[category][item]) {
-                    console.log(`<option value=${clothes}></option>`);
                     dataList.innerHTML += `<option value=${clothes}></option>`;
                 }
             } else {
@@ -54,7 +41,6 @@ function createItem(inventoryType) {
     }
     localStorage.setItem('last_val', itemNumber);
     itemNumber++;
-
 }
 
 function deleteItem(id) {
@@ -62,70 +48,83 @@ function deleteItem(id) {
     div.parentNode.removeChild(div);
 }
 
-function validateNewItem(inputItemNumber, inventoryType) {
+function validateNewItem(inventoryType) {
     var error;
-    var itemName = document.getElementById(`item[${inputItemNumber}]`).value;
-    var itemQuantity = document.getElementById(`quantity[${inputItemNumber}]`).value;
+    var itemNames = document.getElementsByClassName(`item`);
+    var itemQuantity = document.getElementsByClassName(`quantity`);
 
-    if (itemName == "") {
-        error = "* Please enter item";
-    } else if (itemQuantity == "") {
-        error = "* Please enter quantity";
-    } else if (!Number.isInteger(parseInt(itemQuantity))) {
-        error = "* Quantity should be a number";
-    } else {
-        let itemFound = false;
-        for (let category in newInventoryObject.inventory) {
-            for (let item in newInventoryObject.inventory[category]) {
+    if (!document.getElementById(`new${inventoryType}Name`).value) {
+        error = "* Please enter name";
+        return error;
+    }
+    for (let id = 0; id < itemNames.length; id++) {
 
-                if (item == itemName) {
-                    itemFound = true;
-                    if (inventoryType == "outbound") {
-                        var currentstock = localStorage.getItem("stock");
+        if (itemNames[id].value == "") {
+            error = "* Please enter item";
+            itemNames[id].focus();
+            return error;
+        } else if (itemQuantity[id].value == "") {
+            error = "* Please enter quantity";
+            itemQuantity[id].focus();
+            return error;
+        } else if (parseInt(itemQuantity[id].value) < 0) {
+            error = "* Quantity should be a  greatnumberer than 0";
+            itemQuantity[id].focus();
+            return error;
+        } else {
+            let itemFound = false;
+            for (let category in newInventoryObject.inventory) {
+                for (let item in newInventoryObject.inventory[category]) {
 
-                        currentstock = JSON.parse(currentstock);
+                    if (item == itemNames[id].value) {
 
-                        if (currentstock.currentStock[category][item] < itemQuantity) {
-                            error = `Quantity of ${itemName} available is ${currentstock.currentStock[category][item]}`;
+                        itemFound = true;
+                        if (inventoryType == "outbound") {
+                            var currentstock = localStorage.getItem("stock");
+                            currentstock = JSON.parse(currentstock);
+
+                            if (currentstock.currentStock[category][item] < itemQuantity[id].value) {
+                                error = `Quantity of ${itemNames[id].value} available is ${currentstock.currentStock[category][item]}`;
+                                itemQuantity[id].focus();
+                            }
                         }
-                    }
-                } else {
-                    for (clothes in newInventoryObject.inventory[category][item]) {
+                    } else {
+                        for (clothes in newInventoryObject.inventory[category][item]) {
+                            if (clothes == itemNames[id].value) {
+                                itemFound = true;
+                                if (inventoryType == "outbound") {
 
-                        if (clothes == itemName) {
-                            itemFound = true;
-
-                            if (inventoryType == "outbound") {
-
-                                let currentstock = localStorage.getItem("stock");
-                                currentstock = JSON.parse(currentstock);
-                                if (currentstock.currentStock[category][item][clothes] < itemQuantity) {
-                                    error = `Quantity of ${itemName} available is ${currentstock.currentStock[category][item][clothes]}`;
-
+                                    let currentstock = localStorage.getItem("stock");
+                                    currentstock = JSON.parse(currentstock);
+                                    if (currentstock.currentStock[category][item][clothes] < itemQuantity[id].value) {
+                                        error = `Quantity of ${itemNames[id].value} available is ${currentstock.currentStock[category][item][clothes]}`;
+                                        itemQuantity[id].focus();
+                                        return error;
+                                    }
                                 }
-
                             }
                         }
                     }
                 }
             }
-        }
-        if (itemFound == false) {
-            error = "* Item not found!"
+            if (itemFound == false) {
+                error = "* Item not found!"
+                itemNames[id].focus();
+                return error;
+            }
         }
     }
     return error;
 }
 
 function newsubmitList(inventoryType) {
-    var error = validateNewItem(localStorage.getItem('last_val'), inventoryType);
-    if (!document.getElementById(`new${inventoryType}Name`).value) {
-        error = "* Please enter name";
-    }
+    var error = validateNewItem(inventoryType);
     if (error) {
         document.getElementById("newInventoryError").innerHTML = error;
 
     } else {
+        document.getElementById("newInventoryError").innerHTML = "";
+
         var name = document.getElementById(`new${inventoryType}Name`).value;
 
         var itemName = document.getElementsByClassName("item");

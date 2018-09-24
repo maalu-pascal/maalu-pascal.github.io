@@ -1,6 +1,7 @@
 .inventoryListDiv {
-    overflow: scroll;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .inventoryListDiv h1 {
@@ -17,14 +18,15 @@
     border-bottom-right-radius: 3px;
 }
 
-.newInventory {
-    border-radius: 5px;
+.newInventoryButton {
     margin: 10px 0 10px 0;
-    float: left;
-    background: #cecdcd;
-    height: 25px;
-    font-weight: 550;
-    color: #2c2c2c;
+    float: right;
+    font-weight: bold;
+}
+
+.inboundList {
+    height: 92%;
+    overflow: scroll;
 }
 
 .newInventory:hover {

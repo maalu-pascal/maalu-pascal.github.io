@@ -7,6 +7,10 @@ body {
     background-position: center;
 }
 
+* {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
 .logo {
     width: 18%;
 }

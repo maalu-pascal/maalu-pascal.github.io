@@ -5,10 +5,7 @@
     padding: 10px;
 }
 
-.newInventoryContainer button {
-    background: rgb(102, 102, 102);
-    background: whitesmoke;
-    color: black;
+.container button {
     border-radius: 5px;
     height: 30px;
 }
@@ -29,10 +26,11 @@
 .itemDiv {
     display: flex;
     margin-bottom: 10px;
+    align-items: baseline;
 }
 
 .itemDiv input {
-    margin-right: 10px;
+    margin: 10px 10px 5px 5px;
 }
 
 .addItem {
@@ -51,11 +49,12 @@
     overflow: scroll;
     height: 100%;
     padding: 5px;
+    margin-top: 20px;
 }
 
-.newItemHeading {
+.newInventoryContainer span{
     margin: 5px;
-    padding: 10px 0 5px 0;
+    font-size: 18px;
 }
 
 .newItemInputs input {
