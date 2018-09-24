@@ -33,16 +33,14 @@ window.onload = function (event) {
 
 function changeNavigationBar(UserStatus) {
     let signedIn = document.getElementsByClassName("signed-in");
-    let signedOut = document.getElementsByClassName("signed-out");
-
+    let display;
     if (UserStatus == "logged-in") {
-        for (element of signedIn) element.style.display = "block";
-        for (element of signedOut) element.style.display = "none";
-
+        display = "block";
     } else {
-        for (element of signedIn) element.style.display = "none";
-        for (element of signedOut) element.style.display = "block";
+        display = "none";
     }
+    for (element of signedIn) element.style.display = display;
+
 }
 
 function containerContent(url) {

@@ -4,11 +4,15 @@
     flex-direction: column;
 }
 
+.inventoryList {
+    height: 92%;
+    overflow: scroll;
+}
+
 .inventoryListDiv h1 {
     margin: 0px;
-    padding: 5px;
     margin-top: 10px;
-    font-family: serif;
+    padding: 5px;
 }
 
 .inventoryTable {
@@ -22,17 +26,6 @@
     margin: 10px 0 10px 0;
     float: right;
     font-weight: bold;
-}
-
-.inboundList {
-    height: 92%;
-    overflow: scroll;
-}
-
-.newInventory:hover {
-    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
-    background: whitesmoke;
-    color: black;
 }
 
 .tableBody tr, .inventoryTable th {
@@ -52,12 +45,12 @@
     border-bottom: #2c2c2c;
 }
 
+.tableBody tr:hover {
+    background-color: #ddd;
+}
+
 .inventoryTable td {
     padding: 5px;
     padding-left: 5%;
     border: 1px solid #202020;
-}
-
-.tableBody tr:hover {
-    background-color: #ddd;
 }

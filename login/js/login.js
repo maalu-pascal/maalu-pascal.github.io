@@ -2,6 +2,7 @@ function loginPage() {
     containerContent('../login/html/login.html');
     checkSubmit();
 }
+
 function submitUser() {
     var userName = document.getElementById("username").value;
     var userPassword = document.getElementById("userpassword").value;
@@ -28,6 +29,7 @@ function submitUser() {
             }).catch(err => console.error(err));
     }
 }
+
 function login() {
     localStorage.setItem("userStatus", "logged-in");
     changeNavigationBar('logged-in');

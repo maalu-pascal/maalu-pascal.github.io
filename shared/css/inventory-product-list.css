@@ -3,19 +3,6 @@
     color: #0a0808;
 }
 
-
-
-.back:hover {
-    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
-    background: whitesmoke;
-    color: black;
-}
-
-.products td {
-    font-size: 17px;
-    font-weight: 550;
-}
-
 .productListContainer {
     height: 95%;
     display: flex;
@@ -27,14 +14,14 @@
 .productList {
     width: 92%;
     min-width: 350px;
-    min-height:150px;
+    min-height: 150px;
     text-transform: capitalize;
-    border-radius: 10px;
-    padding: 30px;
+    padding: 15px;
     opacity: 1;
     color: #000000;
     float: inherit;
     overflow: auto;
+    margin: 20px;
 }
 
 .productList #back {
@@ -44,6 +31,11 @@
 .products {
     display: flex;
     align-content: center;
+}
+
+.products td {
+    font-size: 17px;
+    font-weight: 550;
 }
 
 .products h3 {

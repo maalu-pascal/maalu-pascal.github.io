@@ -5,15 +5,6 @@
     padding: 10px;
 }
 
-.container button {
-    border-radius: 5px;
-    height: 30px;
-}
-
-.newInventoryContainer #back {
-    float: right;
-}
-
 #newInventoryError {
     color: rgb(163, 3, 3);
 }
@@ -31,14 +22,18 @@
 
 .itemDiv input {
     margin: 10px 10px 5px 5px;
+    height: 25px;
+    border-radius: 4px;
 }
 
 .addItem {
-    margin: 0;
+    margin-left: 5px;
+    margin-top: 10px;
 }
 
 .deleteItem {
-    margin-left: 10px;
+    margin-left: 30px;
+    background: #b8b8b8;
 }
 
 .itemInputField {
@@ -57,17 +52,10 @@
     font-size: 18px;
 }
 
-.newItemInputs input {
-    height: 25px;
-    border-radius: 4px;
-}
-
 .form input {
-    width: 20%;
-    min-width: 100px;
     padding: 1%;
     height: 25px;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .form {

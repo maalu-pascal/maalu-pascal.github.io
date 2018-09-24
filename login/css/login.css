@@ -9,9 +9,6 @@
     margin-left: 30%;
     padding: 50px 30px;
 }
-#errorMessage {
-    color: rgb(163, 3, 3);
-}
 
 .login input {
     margin-bottom: 20px;
