@@ -1,0 +1,67 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+    <title>Inventory Management System</title>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="shared/css/shared.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="welcome/css/welcome.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="login/css/login.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="dashboard/css/dashboard.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="current-stock/css/current-stock.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="shared/css/inventory-list.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="shared/css/inventory-product-list.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="shared/css/new-inventory.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="shared/css//new-inventory.css" />
+
+    <script src="node_modules/chart.js/dist/Chart.js"></script>
+
+    <script src="shared/js/shared.js"></script>
+    <script src="login/js/login.js" defer></script>
+    <script src="dashboard/js/dashboard.js" defer></script>
+    <script src="current-stock/js/current-stock.js" defer></script>
+    <script src="inbound/inbound-list/js/inbound-list.js" defer></script>
+    <script src="outbound/outbound-list/js/outbound-list.js" defer></script>
+    <script src="shared/js/inventory-product-list.js" defer></script>
+    <script src="shared/js/inventory-list.js" defer></script>
+    <script src="shared/js/new-inventory.js" defer></script>
+
+</head>
+
+<body>
+    <div>
+        <div class="row">
+            <div class="logo">
+                <img src="assets/images/logo.jpeg">
+            </div>
+            <div class="top-nav">
+                <ul class="main-nav">
+                    <li><button type="button" class="signed-in" id="logoutButton" onclick="logout()">LOGOUT</button></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="side-nav">
+                <div id="side-nav">
+                    <ul>
+                        <li><button type="button" class = "signed-in" id="dashboard" onclick="dashboard()" >DASHBOARD</button></li>
+                        <li><button type="button" class = "signed-in" id="currentStock" onclick="currentStock()" >CURRENT STOCK</button></li>
+                        <li><button type="button" class = "signed-in" id="inbound" onclick="inbound()" >INBOUND</button></li>
+                        <li><button type="button" class = "signed-in" id="outbound" onclick="outbound()" >OUTBOUND</button></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content">
+                <div id="content">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

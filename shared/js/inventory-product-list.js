@@ -1,5 +1,5 @@
 function inventoryProductList(name, date, inventoryListName) {
-    containerContent('../'+inventoryListName+'/'+inventoryListName+'-product-list/html/'+inventoryListName+'-product-list.html');
+    containerContent(`${inventoryListName}/${inventoryListName}-product-list/html/${inventoryListName}-product-list.html`);
     productList(name, date,  inventoryListName);
 }
 

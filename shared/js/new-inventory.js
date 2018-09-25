@@ -1,12 +1,12 @@
 var newInventoryObject;
 
 function createNewInventory(inventoryType) {
-    containerContent('../' + inventoryType + '/new-' + inventoryType + '/html/new-' + inventoryType + '.html');
+    containerContent(`${inventoryType}/new-${inventoryType}/html/new-${inventoryType}.html`);
     localStorage.setItem('last_val', 0);
     itemNumber = 0;
 
     var request = new XMLHttpRequest();
-    request.open("GET", `../shared/json/new-inventory.json`, false);
+    request.open("GET", `shared/json/new-inventory.json`, false);
     request.send(null);
     newInventoryObject = request.responseText;
     newInventoryObject = JSON.parse(newInventoryObject);

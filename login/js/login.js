@@ -1,5 +1,5 @@
 function loginPage() {
-    containerContent('../login/html/login.html');
+    containerContent('login/html/login.html');
     checkSubmit();
 }
 
@@ -12,7 +12,7 @@ function submitUser() {
         errorMessage = "*Please enter username/password";
         document.getElementById("errorMessage").innerHTML = errorMessage;
     } else {
-        fetch('../login/json/login.json')
+        fetch('login/json/login.json')
             .then(res => res.json())
             .then((out) => {
                 for (element of out.users) {
@@ -51,5 +51,5 @@ function checkSubmit(e) {
 function logout() {
     localStorage.setItem("userStatus", "logged-out");
     changeNavigationBar('logged-out');
-    containerContent('../login/html/login.html')
+    containerContent('login/html/login.html')
 }

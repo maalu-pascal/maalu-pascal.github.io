@@ -1,5 +1,5 @@
 function dashboard() {
-    containerContent('../dashboard/html/dashboard.html');
+    containerContent('dashboard/html/dashboard.html');
     loadChart();
 }
 

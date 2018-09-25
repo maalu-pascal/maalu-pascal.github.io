@@ -7,7 +7,7 @@ window.onload = function (event) {
     }
 
     if (!localStorage.getItem("stock")) {
-        var data = fetch('../shared/json/initial-stock.json')
+        var data = fetch('shared/json/initial-stock.json')
             .then(res => res.json())
             .then((out) => {
                 var stock = JSON.stringify(out);
@@ -27,7 +27,7 @@ window.onload = function (event) {
     if (UserStatus == "logged-in") {
         dashboard();
     } else {
-        containerContent('../welcome/html/welcome.html');
+        containerContent('welcome/html/welcome.html');
     }
 }
 

@@ -1,5 +1,5 @@
 function currentStock() {
-    containerContent('../current-stock/html/current-stock.html');
+    containerContent('current-stock/html/current-stock.html');
     displayCurrentStock();
 }
 
