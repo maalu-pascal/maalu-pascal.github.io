@@ -55,6 +55,7 @@ function validateNewItem(inventoryType) {
 
     if (!document.getElementById(`new${inventoryType}Name`).value) {
         error = "* Please enter name";
+        document.getElementById(`new${inventoryType}Name`).focus();
         return error;
     }
     for (let id = 0; id < itemNames.length; id++) {
