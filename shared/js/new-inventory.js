@@ -1,4 +1,5 @@
 var newInventoryObject;
+var arrayOfItems = [];
 
 function createNewInventory(inventoryType) {
     containerContent(`${inventoryType}/new-${inventoryType}/html/new-${inventoryType}.html`);
@@ -10,8 +11,31 @@ function createNewInventory(inventoryType) {
     request.send(null);
     newInventoryObject = request.responseText;
     newInventoryObject = JSON.parse(newInventoryObject);
-
+    arrayOfAllItems();
     createItem(inventoryType);
+
+}
+
+function arrayOfAllItems() {
+    console.log("in");
+
+    let stocks = JSON.parse(localStorage.getItem("stock"));
+    arrayOfItems = [];
+    for (category in stocks.currentStock) {
+        for (item in stocks.currentStock[category]) {
+            if (typeof (stocks.currentStock[category][item]) == "object") {
+                for (subCategoryItems in stocks.currentStock[category][item]) {
+                    let newObject = {};
+                    newObject[subCategoryItems] = stocks.currentStock[category][item][subCategoryItems];
+                    arrayOfItems.push(newObject);
+                }
+            } else {
+                let obj = {};
+                obj[item] = stocks.currentStock[category][item];
+                arrayOfItems.push(obj);
+            }
+        }
+    }
 }
 
 function createItem(inventoryType) {
@@ -23,25 +47,22 @@ function createItem(inventoryType) {
                         <button type="button" id = "deleteButton" class="deleteItem" onclick="deleteItem('${itemNumber}')"> Delete </button>
                         </div>`;
     itemdiv.insertAdjacentHTML("beforeend", itemDivData);
-    let data = localStorage.getItem("stock");
-    let stock = JSON.parse(data);
+    
+    //Populating the data-list
     let dataList = document.getElementById(`itemsList${itemNumber}`);
+    let items = arrayOfItems.map((key) => Object.keys(key)[0]);
+    items.forEach(element => {
+        dataList.innerHTML += `<option value=${element}></option>`;
+    });
 
-    //Populating the datalist. 
-    for (let category in stock.currentStock) {
-        for (let item in stock.currentStock[category]) {
-            if (category == "clothes") {
-                for (let clothes in stock.currentStock[category][item]) {
-                    dataList.innerHTML += `<option value=${clothes}></option>`;
-                }
-            } else {
-                dataList.innerHTML += `<option value=${item}></option>`;
-            }
-        }
-    }
     localStorage.setItem('last_val', itemNumber);
     itemNumber++;
 }
+
+function itemsArray() {
+
+}
+
 
 function deleteItem(id) {
     let div = document.getElementById(`itemDiv[${id}]`);
@@ -74,6 +95,12 @@ function validateNewItem(inventoryType) {
             return error;
         } else {
             let itemFound = false;
+
+            let items = arrayOfItems.map((key, value) => Object.keys(key)[0]);
+            console.log(items.find((element)=> element === itemNames[id].value));
+             
+
+
             for (let category in newInventoryObject.inventory) {
                 for (let item in newInventoryObject.inventory[category]) {
 
@@ -183,4 +210,3 @@ function newsubmitList(inventoryType) {
         window[inventoryType]();
     }
 }
-

@@ -1,17 +1,43 @@
 function dashboard() {
     containerContent('dashboard/html/dashboard.html');
+    document.getElementById("dashboard").focus();
     loadChart();
 }
 
+/**
+ * Calculates the total from the corresponding inventory category.
+ * 
+ * @param category - Category in the inventory.
+ * @param inventoryList -inbound/outbound.
+ */
+function calculateTotal(category, inventoryList) {
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    let inventory_category = 0;
+    categoryInbounds = inventoryList.map(inventoryList => inventoryList.inventory[category]);
+    for (inventoryCategory of categoryInbounds) {
+        if (inventoryCategory) {
+            inventory_category += parseInt(Object.values(inventoryCategory).reduce(reducer));
+        }
+    }
+    return inventory_category;
+}
+
+/**
+ * The current stock is read from the localStorage.
+ * Total current food, medicines, toiletries and clothes is calculated.
+ * The inbound and outbound is read from the localStorage.
+ * Total food, medicines, toiletries and clothes in inbound and outbound is calculated separately.
+ * 
+ * The calculated values are then populated into the graph.
+ */
 function loadChart() {
     let ctx = document.getElementById("myChart").getContext('2d');
 
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+    //Calculating the current status of total food, medicine,clothes and toiletries.
     let data = localStorage.getItem("stock");
     let stock = JSON.parse(data);
-
-    //Calculating the current status of total number of food, medicine,clothes and toiletries.
-
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
     let current_food = Object.values(stock.currentStock.food).reduce(reducer);
     let current_medicines = Object.values(stock.currentStock.medicines).reduce(reducer);
@@ -21,25 +47,13 @@ function loadChart() {
         current_clothes += Object.values(stock.currentStock.clothes[item]).reduce(reducer);
     }
 
-    //Calculating the total number of inbound - food, medicine,clothes and toiletries.
+    //Calculating the total inbound of food, medicine,clothes and toiletries.
     let inboundList = localStorage.getItem("inbound");
     inboundList = JSON.parse(inboundList);
 
-    function calcucalateTotal(category, inventoryList) {
-        const reducer = (accumulator, currentValue) => accumulator + currentValue;
-        let inventory_category = 0;
-        categoryInbounds = inventoryList.map(inventoryList => inventoryList.inventory[category]);
-        for (inventoryCategory of categoryInbounds) {
-            if (inventoryCategory) {
-                inventory_category += parseInt(Object.values(inventoryCategory).reduce(reducer));
-            }
-        }
-        return inventory_category;
-    }
-
-    let inbound_food = calcucalateTotal('food', inboundList);
-    let inbound_toileteries = calcucalateTotal('toiletries', inboundList);
-    let inbound_medicines = calcucalateTotal('medicines', inboundList);
+    let inbound_food = calculateTotal('food', inboundList);
+    let inbound_toileteries = calculateTotal('toiletries', inboundList);
+    let inbound_medicines = calculateTotal('medicines', inboundList);
 
     let inbound_clothes = 0;
     clothesInbound = inboundList.map(inboundList => inboundList.inventory.clothes);
@@ -48,14 +62,14 @@ function loadChart() {
             inbound_clothes += parseInt(Object.values(inventorycategory[subcategory]).reduce(reducer));
         }
     }
-    
+
     //Calculating the total number of outbound - food, medicine,clothes and toiletries.
     let outboundList = localStorage.getItem("outbound");
     outboundList = JSON.parse(outboundList);
 
-    let outbound_food = calcucalateTotal('food', outboundList);
-    let outbound_toileteries = calcucalateTotal('toiletries', outboundList);
-    let outbound_medicines = calcucalateTotal('medicines', outboundList);
+    let outbound_food = calculateTotal('food', outboundList);
+    let outbound_toileteries = calculateTotal('toiletries', outboundList);
+    let outbound_medicines = calculateTotal('medicines', outboundList);
 
     let outbound_clothes = 0;
     clothesInbound = outboundList.map(outboundList => outboundList.inventory.clothes);

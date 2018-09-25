@@ -41,25 +41,21 @@
                 </ul>
             </div>
         </div>
-
         <div class="row">
-
-            <div class="side-nav">
-                <div id="side-nav">
-                    <ul>
-                        <li><button type="button" class = "signed-in" id="dashboard" onclick="dashboard()" >DASHBOARD</button></li>
-                        <li><button type="button" class = "signed-in" id="currentStock" onclick="currentStock()" >CURRENT STOCK</button></li>
-                        <li><button type="button" class = "signed-in" id="inbound" onclick="inbound()" >INBOUND</button></li>
-                        <li><button type="button" class = "signed-in" id="outbound" onclick="outbound()" >OUTBOUND</button></li>
-                    </ul>
-                </div>
+            <div id="side-nav" class="signed-in">
+                <ul>
+                    <li><button type="button" class="signed-in" id="dashboard" onclick="dashboard()">DASHBOARD</button></li>
+                    <li><button type="button" class="signed-in" id="currentStock" onclick="currentStock()">CURRENT STOCK</button></li>
+                    <li><button type="button" class="signed-in" id="inbound" onclick="inbound()">INBOUND</button></li>
+                    <li><button type="button" class="signed-in" id="outbound" onclick="outbound()">OUTBOUND</button></li>
+                </ul>
             </div>
-
-            <div class="content">
-                <div id="content">
-                </div>
+            <div id="content" class="content">
+                <section class="welcome" id="welcome">
+                    <h1 class="welcomeUser">Inventory Management System</h1>
+                    <button align="center" type="button" id="loginButton" onclick="loginPage()">LOGIN</button>
+                </section>
             </div>
-
         </div>
     </div>
 </body>
