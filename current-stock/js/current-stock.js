@@ -5,12 +5,12 @@ function currentStock() {
 
 function displayCurrentStock() {
 
-    var data = localStorage.getItem("stock");
-    var stock = JSON.parse(data);
-    var table = document.getElementById("currentStockTable");
+    let data = localStorage.getItem("stock");
+    let stock = JSON.parse(data);
+    let table = document.getElementById("currentStockTable");
 
     for (category in stock.currentStock) {
-        var row = table.insertRow();
+        let row = table.insertRow();
         row.insertCell(0).innerHTML = `<h4>${category} : </h4>`;
         let items="";
         for (item in stock.currentStock[category]) {

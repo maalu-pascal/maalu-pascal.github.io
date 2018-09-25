@@ -7,10 +7,10 @@ window.onload = function (event) {
     }
 
     if (!localStorage.getItem("stock")) {
-        var data = fetch('shared/json/initial-stock.json')
+        let data = fetch('shared/json/initial-stock.json')
             .then(res => res.json())
             .then((out) => {
-                var stock = JSON.stringify(out);
+                let stock = JSON.stringify(out);
                 localStorage.setItem("stock", stock);
             }).catch(err => console.error(err));
     }

@@ -11,7 +11,7 @@ function productList(name, date, inventoryListName) {
 
         if (inventoryList[eachInventory].name == name && inventoryList[eachInventory].date == date) {
 
-            var inventoryDate = new Date(inventoryList[eachInventory].date);
+            let inventoryDate = new Date(inventoryList[eachInventory].date);
             inventoryDate = inventoryDate.toDateString();
             document.getElementById("nameSpan").innerHTML = inventoryList[eachInventory].name;
             document.getElementById("dateSpan").innerHTML = inventoryDate;
@@ -41,7 +41,7 @@ function productList(name, date, inventoryListName) {
 }
 
 function productRow(item, quantity) {
-    var product = `<tr><td>${item}</td><td class = "itemQuantity" >- ${quantity}</td><tr>`;
-    var productRow = document.getElementById("tBodyProducts");
+    let product = `<tr><td>${item}</td><td class = "itemQuantity" >- ${quantity}</td><tr>`;
+    let productRow = document.getElementById("tBodyProducts");
     productRow.insertAdjacentHTML("beforeend",product);
 }

@@ -4,30 +4,30 @@ function dashboard() {
 }
 
 function loadChart() {
-    var ctx = document.getElementById("myChart").getContext('2d');
+    let ctx = document.getElementById("myChart").getContext('2d');
 
-    var data = localStorage.getItem("stock");
-    var stock = JSON.parse(data);
+    let data = localStorage.getItem("stock");
+    let stock = JSON.parse(data);
 
     //Calculating the current status of total number of food, medicine,clothes and toiletries.
 
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
-    var current_food = Object.values(stock.currentStock.food).reduce(reducer);
-    var current_medicines = Object.values(stock.currentStock.medicines).reduce(reducer);
-    var current_toiletries = Object.values(stock.currentStock.toiletries).reduce(reducer);
-    var current_clothes = 0;
+    let current_food = Object.values(stock.currentStock.food).reduce(reducer);
+    let current_medicines = Object.values(stock.currentStock.medicines).reduce(reducer);
+    let current_toiletries = Object.values(stock.currentStock.toiletries).reduce(reducer);
+    let current_clothes = 0;
     for (item in stock.currentStock.clothes) {
         current_clothes += Object.values(stock.currentStock.clothes[item]).reduce(reducer);
     }
 
     //Calculating the total number of inbound - food, medicine,clothes and toiletries.
-    var inboundList = localStorage.getItem("inbound");
+    let inboundList = localStorage.getItem("inbound");
     inboundList = JSON.parse(inboundList);
 
     function calcucalateTotal(category, inventoryList) {
         const reducer = (accumulator, currentValue) => accumulator + currentValue;
-        var inventory_category = 0;
+        let inventory_category = 0;
         categoryInbounds = inventoryList.map(inventoryList => inventoryList.inventory[category]);
         for (inventoryCategory of categoryInbounds) {
             if (inventoryCategory) {
@@ -37,34 +37,35 @@ function loadChart() {
         return inventory_category;
     }
 
-    var inbound_food = calcucalateTotal('food', inboundList);
-    var inbound_toileteries = calcucalateTotal('toiletries', inboundList);
-    var inbound_medicines = calcucalateTotal('medicines', inboundList);
+    let inbound_food = calcucalateTotal('food', inboundList);
+    let inbound_toileteries = calcucalateTotal('toiletries', inboundList);
+    let inbound_medicines = calcucalateTotal('medicines', inboundList);
 
-    var inbound_clothes = 0;
+    let inbound_clothes = 0;
     clothesInbound = inboundList.map(inboundList => inboundList.inventory.clothes);
     for (inventorycategory of clothesInbound) {
         for (subcategory in inventorycategory) {
             inbound_clothes += parseInt(Object.values(inventorycategory[subcategory]).reduce(reducer));
         }
     }
-
+    
     //Calculating the total number of outbound - food, medicine,clothes and toiletries.
-    var outboundList = localStorage.getItem("outbound");
+    let outboundList = localStorage.getItem("outbound");
     outboundList = JSON.parse(outboundList);
 
-    var outbound_food = calcucalateTotal('food', outboundList);
-    var outbound_toileteries = calcucalateTotal('toiletries', outboundList);
-    var outbound_medicines = calcucalateTotal('medicines', outboundList);
+    let outbound_food = calcucalateTotal('food', outboundList);
+    let outbound_toileteries = calcucalateTotal('toiletries', outboundList);
+    let outbound_medicines = calcucalateTotal('medicines', outboundList);
 
-    var outbound_clothes = 0;
+    let outbound_clothes = 0;
     clothesInbound = outboundList.map(outboundList => outboundList.inventory.clothes);
     for (inventorycategory of clothesInbound) {
         for (subcategory in inventorycategory) {
-            inbound_clothes += parseInt(Object.values(inventorycategory[subcategory]).reduce(reducer));
+            outbound_clothes += parseInt(Object.values(inventorycategory[subcategory]).reduce(reducer));
         }
     }
-    var currentStock = {
+
+    let currentStock = {
         label: 'Current Stock',
         data: [current_food, current_clothes, current_toiletries, current_medicines],
         backgroundColor: [
@@ -82,7 +83,7 @@ function loadChart() {
         borderWidth: 1
     };
 
-    var inboundStock = {
+    let inboundStock = {
         label: 'Inbound Stock',
         data: [inbound_food, inbound_clothes, inbound_toileteries, inbound_medicines],
         backgroundColor: [
@@ -100,7 +101,7 @@ function loadChart() {
         borderWidth: 1
     };
 
-    var outboundStock = {
+    let outboundStock = {
         label: 'Outbound Stock',
         data: [outbound_food, outbound_clothes, outbound_toileteries, outbound_medicines],
         backgroundColor: [
@@ -118,7 +119,7 @@ function loadChart() {
         borderWidth: 1
     };
 
-    var myChart = new Chart(ctx, {
+    let myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: ["Food", "Clothes", "Toiletries", "Medicines"],

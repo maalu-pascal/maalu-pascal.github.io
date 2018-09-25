@@ -4,10 +4,10 @@ function loginPage() {
 }
 
 function submitUser() {
-    var userName = document.getElementById("username").value;
-    var userPassword = document.getElementById("userpassword").value;
-    var userFound = 0;
-    var errorMessage;
+    let userName = document.getElementById("username").value;
+    let userPassword = document.getElementById("userpassword").value;
+    let userFound = 0;
+    let errorMessage;
     if (userName == "" || userPassword == "") {
         errorMessage = "*Please enter username/password";
         document.getElementById("errorMessage").innerHTML = errorMessage;
@@ -37,7 +37,7 @@ function login() {
 }
 
 function checkSubmit(e) {
-    var input = document.getElementById("userpassword");
+    let input = document.getElementById("userpassword");
     input.addEventListener("keyup", function (event) {
         event.preventDefault();
         if (event.keyCode === 13) {

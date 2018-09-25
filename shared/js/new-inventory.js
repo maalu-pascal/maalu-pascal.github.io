@@ -5,7 +5,7 @@ function createNewInventory(inventoryType) {
     localStorage.setItem('last_val', 0);
     itemNumber = 0;
 
-    var request = new XMLHttpRequest();
+    let request = new XMLHttpRequest();
     request.open("GET", `shared/json/new-inventory.json`, false);
     request.send(null);
     newInventoryObject = request.responseText;
@@ -15,16 +15,16 @@ function createNewInventory(inventoryType) {
 }
 
 function createItem(inventoryType) {
-    var itemdiv = document.getElementById("newItemInputs");
-    var itemDivData = `<div id = itemDiv[${itemNumber}] class= itemDiv>
+    let itemdiv = document.getElementById("newItemInputs");
+    let itemDivData = `<div id = itemDiv[${itemNumber}] class= itemDiv>
                         <div class = "itemInputField"><input type='text' list="itemsList${itemNumber}" id= item[${itemNumber}] class='item' placeholder = "Enter Item" ></input>
                         <datalist id="itemsList${itemNumber}"></datalist></div>
                         <div><input type='number' id= quantity[${itemNumber}] class= 'quantity' placeholder = "Enter quantity"></input></div> 
                         <button type="button" id = "deleteButton" class="deleteItem" onclick="deleteItem('${itemNumber}')"> Delete </button>
                         </div>`;
     itemdiv.insertAdjacentHTML("beforeend", itemDivData);
-    var data = localStorage.getItem("stock");
-    var stock = JSON.parse(data);
+    let data = localStorage.getItem("stock");
+    let stock = JSON.parse(data);
     let dataList = document.getElementById(`itemsList${itemNumber}`);
 
     //Populating the datalist. 
@@ -49,9 +49,9 @@ function deleteItem(id) {
 }
 
 function validateNewItem(inventoryType) {
-    var error;
-    var itemNames = document.getElementsByClassName(`item`);
-    var itemQuantity = document.getElementsByClassName(`quantity`);
+    let error;
+    let itemNames = document.getElementsByClassName(`item`);
+    let itemQuantity = document.getElementsByClassName(`quantity`);
 
     if (!document.getElementById(`new${inventoryType}Name`).value) {
         error = "* Please enter name";
@@ -81,7 +81,7 @@ function validateNewItem(inventoryType) {
 
                         itemFound = true;
                         if (inventoryType == "outbound") {
-                            var currentstock = localStorage.getItem("stock");
+                            let currentstock = localStorage.getItem("stock");
                             currentstock = JSON.parse(currentstock);
 
                             if (currentstock.currentStock[category][item] < itemQuantity[id].value) {
@@ -119,17 +119,17 @@ function validateNewItem(inventoryType) {
 }
 
 function newsubmitList(inventoryType) {
-    var error = validateNewItem(inventoryType);
+    let error = validateNewItem(inventoryType);
     if (error) {
         document.getElementById("newInventoryError").innerHTML = error;
 
     } else {
         document.getElementById("newInventoryError").innerHTML = "";
 
-        var name = document.getElementById(`new${inventoryType}Name`).value;
+        let name = document.getElementById(`new${inventoryType}Name`).value;
 
-        var itemName = document.getElementsByClassName("item");
-        var itemQuantity = document.getElementsByClassName("quantity");
+        let itemName = document.getElementsByClassName("item");
+        let itemQuantity = document.getElementsByClassName("quantity");
 
         let currentstock = localStorage.getItem("stock");
         currentstock = JSON.parse(currentstock);
