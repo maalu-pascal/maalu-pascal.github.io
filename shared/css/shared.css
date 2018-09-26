@@ -26,10 +26,6 @@ input {
     padding: 10px;
 }
 
-/* input:focus {
-    outline-style: none;
-} */
-
 input::placeholder {
     color: #525252;
 }
@@ -61,7 +57,7 @@ input::placeholder {
     display: inline-block;
 }
 
-.main-nav button {
+.main-nav button, #loginButton {
     border: 1px solid white;
     color: white;
     font-weight: bold;

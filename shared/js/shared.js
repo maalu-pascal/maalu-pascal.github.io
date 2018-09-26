@@ -26,8 +26,8 @@ window.onload = function (event) {
     changeNavigationBar(UserStatus);
     if (UserStatus == "logged-in") {
         dashboard();
-    // } else {
-    //     containerContent('welcome/html/welcome.html');
+    } else {
+        containerContent('welcome/html/welcome.html');
     }
 }
 
