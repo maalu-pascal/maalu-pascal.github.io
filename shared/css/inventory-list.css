@@ -39,6 +39,9 @@
     font-family: sans-serif;
 }
 
+.tableBody tr:hover {
+    cursor: pointer;
+}
 .inventoryTable th {
     background-color: #b4b4b4;
     text-align: center;

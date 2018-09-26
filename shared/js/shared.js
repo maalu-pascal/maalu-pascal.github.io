@@ -41,6 +41,6 @@ function changeNavigationBar(UserStatus) {
 function containerContent(url) {
      req = new XMLHttpRequest();
     req.open("GET", url, false);
-    req.send(null);
+    req.send();
     document.getElementById("content").innerHTML = req.responseText;
 }

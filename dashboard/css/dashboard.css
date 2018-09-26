@@ -1,12 +1,11 @@
-.heading {
-    display: flex;
-    justify-content: center;
-}
-
 .chart-container {
     opacity: 1;
     display: flex;
-    justify-content: center;
+    margin: auto;
+    width:60%;
+    min-width: 300px;
+    height: 40%;
+    min-height: 200px;
 }
 
 canvas {

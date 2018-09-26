@@ -5,8 +5,7 @@ function currentStock() {
 
 function displayCurrentStock() {
 
-    let data = localStorage.getItem("stock");
-    let stock = JSON.parse(data);
+    let stock = JSON.parse(localStorage.getItem("stock"));
     let table = document.getElementById("currentStockTable");
 
     for (category in stock.currentStock) {
