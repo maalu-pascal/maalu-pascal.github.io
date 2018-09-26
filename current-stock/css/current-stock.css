@@ -16,25 +16,22 @@
     border-collapse: collapse;
     border: 1px solid black;
     text-transform: capitalize;
-}
-
-#currentStockTable {
     width: 100%;
     display: table;
 }
 
-#currentStockTable tr {
+.currentStockTable tr {
     background-color: #999999;
     border-bottom: 1pt solid black;
 }
 
-#currentStockTable td {
+.currentStockTable td {
     border-collapse: collapse;
     vertical-align: top;
-    padding: 5% 5% 5% 5%;
+    padding: 5%;
     margin-left: 20%;
 }
 
-#currentStockTable #subcategory {
+.currentStockTable #subcategory {
     padding-left: 0;
 }
