@@ -20,34 +20,11 @@ function createNewInventory(inventoryType) {
     request.send();
     newInventoryObject = JSON.parse(request.responseText);
 
-    arrayOfAllItems();
+    //To create an array of objects holding the item names and its corresponding quantity only.
+    arrayOfAllItems(JSON.parse(localStorage.getItem("stock")),"currentStock");
 
     //The first div with input fields for item name and quantity is created.
     createItem(inventoryType);
-}
-
-/**
- * The current stock is read from the localstorage.
- * An array of objects is created with the item-name as key, and its corresponding quantity as its value.
- */
-function arrayOfAllItems() {
-    let stocks = JSON.parse(localStorage.getItem("stock"));
-    arrayOfItems = [];
-    for (category in stocks.currentStock) {
-        for (item in stocks.currentStock[category]) {
-            if (typeof (stocks.currentStock[category][item]) == "object") {
-                for (subCategoryItems in stocks.currentStock[category][item]) {
-                    let newObject = {};
-                    newObject[subCategoryItems] = stocks.currentStock[category][item][subCategoryItems];
-                    arrayOfItems.push(newObject);
-                }
-            } else {
-                let newItemObject = {};
-                newItemObject[item] = stocks.currentStock[category][item];
-                arrayOfItems.push(newItemObject);
-            }
-        }
-    }
 }
 
 /**

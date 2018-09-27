@@ -3,6 +3,9 @@ function loginPage() {
     checkSubmit();
 }
 
+/**
+ * Validation is done when the user submits username and password.
+ */
 function submitUser() {
     let userName = document.getElementById("username").value;
     let userPassword = document.getElementById("userpassword").value;
@@ -30,12 +33,22 @@ function submitUser() {
     }
 }
 
+/**
+ * This function is called when the login process is a success.
+ * The status of the user is set to logged-in in the local storage.
+ * The necessary changes are made in the navvigation bar.
+ * Function to load the dashboard is called.
+ */
 function login() {
     localStorage.setItem("userStatus", "logged-in");
     changeNavigationBar('logged-in');
     dashboard();
 }
 
+/**
+ * When the enter key is pressed in the login page, the submit button is clicked.
+ * @param e
+ */
 function checkSubmit(e) {
     let input = document.getElementById("userpassword");
     input.addEventListener("keyup", function (event) {
