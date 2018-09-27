@@ -1,7 +1,8 @@
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
 function dashboard() {
-    containerContent('dashboard/html/dashboard.html');
+    redirectTo('dashboard');
+    // containerContent('dashboard/html/dashboard.html');
     document.getElementById("dashboard").focus();
     loadChart();
 }

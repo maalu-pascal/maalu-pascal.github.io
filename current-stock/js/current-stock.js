@@ -1,7 +1,7 @@
-function currentStock() {
-    containerContent('current-stock/html/current-stock.html');
-    displayCurrentStock();
-}
+// function currentStock() {
+//     containerContent('current-stock/html/current-stock.html');
+//     displayCurrentStock();
+// }
 
 function displayCurrentStock() {
 
