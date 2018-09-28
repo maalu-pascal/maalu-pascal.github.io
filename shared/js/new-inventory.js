@@ -1,27 +1,20 @@
-var newInventoryObject;
-var arrayOfItems = [];
-
 /**
  * 
  * @param inventoryType - inbound/outbound
  */
 function createNewInventory(inventoryType) {
 
-    //The HTML of the corresponding new-inventory is rendered.
-    containerContent(`${inventoryType}/new-${inventoryType}/html/new-${inventoryType}.html`);
-    
-    //Count/ID for each new item is initialised.
+    //Count for each new item is initialised.
     localStorage.setItem('last_val', 0);
     itemNumber = 0;
 
-    //A template for the new-inventory is read from the JSON file. 
-    let request = new XMLHttpRequest();
-    request.open("GET", `shared/json/new-inventory.json`, false);
-    request.send();
-    newInventoryObject = JSON.parse(request.responseText);
+    // let request = new XMLHttpRequest();
+    // request.open("GET", `shared/json/new-inventory.json`, false);
+    // request.send();
+    // newInventoryObject = JSON.parse(request.responseText);
 
     //To create an array of objects holding the item names and its corresponding quantity only.
-    arrayOfAllItems(JSON.parse(localStorage.getItem("stock")),"currentStock");
+    arrayOfAllItems(JSON.parse(localStorage.getItem("stock")), "currentStock");
 
     //The first div with input fields for item name and quantity is created.
     createItem(inventoryType);
@@ -29,6 +22,7 @@ function createNewInventory(inventoryType) {
 
 /**
  * A new div with input fields for item name and quantity, along with the datalist and a delete button is inserted to the newItemInputs div.
+ * 
  * @param inventoryType - inbound/outbound
  */
 function createItem(inventoryType) {
@@ -62,11 +56,12 @@ function deleteItem(id) {
     let div = document.getElementById(`itemDiv[${id}]`);
     div.parentNode.removeChild(div);
 }
- /**
-  * Validation for all the inputs.
-  *  
-  * @param inventoryType - inbound/outbound
-  */
+
+/**
+ * Validation for all the inputs.
+ *  
+ * @param inventoryType - inbound/outbound
+ */
 function validateNewItems(inventoryType) {
     let error;
     let itemNames = document.getElementsByClassName(`item`);
@@ -116,19 +111,24 @@ function validateNewItems(inventoryType) {
 /**
  * Checks if there are any validation errors.
  * If error is found, error is inserted to a span.
- * If no error, the current stock is updated.
- * The quantity corresponding to the new item is changed in the template object variable.
+ * If no error, a template is read from a JSON file.
+ * The quantity corresponding to the new item is changed in the template object variable and the current stock is updated.
  * The template variable is later pushed into the corresponding inventory array in the localstorage.
  *  
  * @param inventoryType - inbound/outbound
  */
-function newsubmitList(inventoryType) {
+function submitNewList(inventoryType) {
     let error = validateNewItems(inventoryType);
     if (error) {
         document.getElementById("newInventoryError").innerHTML = error;
-
     } else {
         document.getElementById("newInventoryError").innerHTML = "";
+
+        //A template for the new-inventory is read from the JSON file. 
+        let request = new XMLHttpRequest();
+        request.open("GET", `shared/json/new-inventory.json`, false);
+        request.send();
+        let newInventoryObject = JSON.parse(request.responseText);
 
         let name = document.getElementById(`new${inventoryType}Name`).value;
         let itemName = document.getElementsByClassName("item");
@@ -178,6 +178,7 @@ function newsubmitList(inventoryType) {
         inventoryList.unshift(newInventoryObject);
 
         localStorage.setItem(inventoryType, JSON.stringify(inventoryList));
-        window[inventoryType]();
+
+        redirectTo(inventoryType, inventoryType);
     }
 }

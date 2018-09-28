@@ -5,7 +5,6 @@ window.onload = function (event) {
     if (!UserStatus) {
         localStorage.setItem("userStatus", "logged-out");
     }
-
     if (!localStorage.getItem("stock")) {
         let data = fetch('shared/json/initial-stock.json')
             .then(res => res.json())
@@ -14,88 +13,32 @@ window.onload = function (event) {
                 localStorage.setItem("stock", stock);
             }).catch(err => console.error(err));
     }
-
-    if (!localStorage.getItem("inbound")) {
-        localStorage.setItem("inbound", "[]");
-    }
-
-    if (!localStorage.getItem("outbound")) {
-        localStorage.setItem("outbound", "[]");
-    }
+    if (!localStorage.getItem("inbound")) localStorage.setItem("inbound", "[]");
+    if (!localStorage.getItem("outbound")) localStorage.setItem("outbound", "[]");
 
     changeNavigationBar(UserStatus);
-    if (UserStatus == "logged-in") {
-        // changeLink("dashboard");
-        dashboard();
-
-    } else {
-        containerContent('welcome/html/welcome.html');
-    }
-
-    // console.log(window.location.pathname);
-    // var currentPath = window.location.pathname;
-    // if (currentPath === '/Inventory-Management-System/index.html') {
-    //     console.log('You are on the root page');
-    // }
-    // else {
-    //     // var route = myFirstRouter.routes.filter(function (r) {
-    //     //     return r.path === currentPath
-    //     // })[0];
-
-    //     let route = routess.filter(function (r) { console.log("q");
-    //             return r.path === currentPath
-    //         })[0];
-    //     console.log(currentPath);
-    //     console.log(route);
-
-    // }
+    (UserStatus == "logged-in") ? redirectTo("dashboard") : redirectTo("welcome");
 }
 
-function redirectTo(name,inventoryType) {
-    var route = routess.filter(function (r) {
-        return r.name === name
-    })[0];
-    console.log(route);
-    console.log(route.url);
-    console.log(route.javascriptFunction);
-    window.history.pushState(route.name, `state${route.name}`, `#${route.name}`);
-    containerContent(route.url);
-    window[route.javascriptFunction](inventoryType);
-    //load the <script src> to head only when the function is called.
-}
-
-function test() {
-    console.log("check");
-}
-
+/**
+ * The display of the navigation bar is changed according to the user status.
+ * 
+ * @param UserStatus - logged-in/logged-out.
+ */
 function changeNavigationBar(UserStatus) {
     let signedIn = document.getElementsByClassName("signed-in");
     let display = (UserStatus == "logged-in") ? "block" : "none";
     for (element of signedIn) element.style.display = display;
-
 }
 
-function containerContent(url) {
+/**
+ * The html file from the path is appended to the content div.
+ * 
+ * @param path - path to the html page to be loaded.
+ */
+function containerContent(path) {
     req = new XMLHttpRequest();
-    req.open("GET", url, false);
+    req.open("GET", path, false);
     req.send();
     document.getElementById("content").innerHTML = req.responseText;
-}
-
-
-
-
-function changeLink(choice) {
-    var options = ['dashboard', 'inbound', 'outbound'];
-    for (var option of options) {
-        if (option == choice) {
-            window.history.pushState(choice, `state${choice}`, `${choice}`);
-
-        }
-    }
-}
-
-function currentStock() {
-    containerContent('current-stock/html/current-stock.html');
-    displayCurrentStock();
 }

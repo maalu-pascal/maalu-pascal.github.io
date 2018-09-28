@@ -1,8 +1,6 @@
-// function currentStock() {
-//     containerContent('current-stock/html/current-stock.html');
-//     displayCurrentStock();
-// }
-
+/**
+ * The current stock is read from the localStorage and the data is fed into a table as a list.
+ */
 function displayCurrentStock() {
 
     let stock = JSON.parse(localStorage.getItem("stock"));
