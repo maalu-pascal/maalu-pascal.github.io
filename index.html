@@ -5,19 +5,12 @@
     <title>Inventory Management System</title>
 
     <link rel="stylesheet" type="text/css" media="screen" href="shared/css/shared.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="welcome/css/welcome.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="login/css/login.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="dashboard/css/dashboard.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="current-stock/css/current-stock.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="shared/css/inventory-list.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="shared/css/inventory-product-list.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="shared/css/new-inventory.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="shared/css//new-inventory.css" />
-
+    <section id="styles"></section>
+    
     <script src="node_modules/chart.js/dist/Chart.js"></script>
     <script src="shared/js/shared.js"></script>
     <script src="shared/js/helpers.js"></script>
-    <script src="shared/js/rout.js"></script>
+    <script src="shared/js/route.js"></script>
 
     <script src="login/js/login.js" defer></script>
     <script src="dashboard/js/dashboard.js" defer></script>
@@ -44,8 +37,7 @@
             <div id="side-nav">
                 <ul>
                     <li><button type="button" class="signed-in" id="dashboard" onclick="redirectTo('dashboard')">DASHBOARD</button></li>
-                    <li><button type="button" class="signed-in" id="currentStock" onclick="redirectTo('current-stock')">CURRENT
-                            STOCK</button></li>
+                    <li><button type="button" class="signed-in" id="currentStock" onclick="redirectTo('current-stock')">CURRENT STOCK</button></li>
                     <li><button type="button" class="signed-in" id="inbound" onclick="redirectTo('inbound','inbound')">INBOUND</button></li>
                     <li><button type="button" class="signed-in" id="outbound" onclick="redirectTo('outbound','outbound')">OUTBOUND</button></li>
                 </ul>
