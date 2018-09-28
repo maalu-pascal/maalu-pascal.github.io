@@ -2,11 +2,11 @@
     <div class="newInventoryContainer">
         <h2 align="center"> New Inbound</h2>
         <div>
-            <button type="button" id="back" class="back" onclick="inbound()">Back</button>
+            <button type="button" id="back" class="back" onclick="redirectTo('inbound','inbound')">Back</button>
         </div>
         <div class="form">
             <span>Enter name : </span><input type="text" id="newinboundName" class="inventoryName" placeholder="Enter name">
-            <button type="button" id="submitList" onclick="newsubmitList('inbound')">Submit</button>
+            <button type="button" id="submitList" onclick="submitNewList('inbound')">Submit</button>
         </div>
         <div> <span id="newInventoryError"></span> </div>
         <div class="itemInputs">

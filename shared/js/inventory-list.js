@@ -1,7 +1,10 @@
-function inboundOutboundList(listName) {
-    let inventoryList = localStorage.getItem(listName);
-    inventoryList = JSON.parse(inventoryList);
-
+/**
+ * The list of inventories are read from the localStorage and fed into a table.
+ * 
+ * @param listName - inbound/outbound 
+ */
+function inventory(listName) {
+    let inventoryList = JSON.parse(localStorage.getItem(listName));
     let newRow = document.getElementById("tableBody");
 
     if (inventoryList == "") {
@@ -11,7 +14,7 @@ function inboundOutboundList(listName) {
         for (eachInventory in inventoryList) {
             let inventoryDate = new Date(inventoryList[eachInventory].date);
             inventoryDate = inventoryDate.toDateString();
-            let row = `<tr onclick= "inventoryProductList('${inventoryList[eachInventory].name}','${inventoryList[eachInventory].date}','${listName}')">
+            let row = `<tr onclick= "redirectTo('${listName}-product-list','${listName}','${inventoryList[eachInventory].name}','${inventoryList[eachInventory].date}')">
                        <td>${inventoryList[eachInventory].name}</td>
                        <td>${inventoryDate}</td> </tr>`;
             newRow.insertAdjacentHTML("beforeend", row);

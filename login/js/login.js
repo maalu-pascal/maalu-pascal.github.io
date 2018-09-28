@@ -1,12 +1,25 @@
-function loginPage() {
-    containerContent('login/html/login.html');
-    checkSubmit();
+/**
+ * Event listener is added for the login password input field.
+ * When the enter key is pressed in the login page, the submit button is clicked.
+ * 
+ * @param e - key up event.
+ */
+function checkSubmit(e) {
+    let input = document.getElementById("userpassword");
+    input.addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            document.getElementById("submit").click();
+            validateUser();
+        }
+    });
+
 }
 
 /**
  * Validation is done when the user submits username and password.
  */
-function submitUser() {
+function validateUser() {
     let userName = document.getElementById("username").value;
     let userPassword = document.getElementById("userpassword").value;
     let userFound = 0;
@@ -42,27 +55,17 @@ function submitUser() {
 function login() {
     localStorage.setItem("userStatus", "logged-in");
     changeNavigationBar('logged-in');
-    dashboard();
+    redirectTo("dashboard");
 }
 
 /**
- * When the enter key is pressed in the login page, the submit button is clicked.
- * @param e
+ * The user status is set to logged-out in th localStorage.
+ * The view is changed by changing the side and top navigation bar.
+ * Page is redirected to login.
  */
-function checkSubmit(e) {
-    let input = document.getElementById("userpassword");
-    input.addEventListener("keyup", function (event) {
-        event.preventDefault();
-        if (event.keyCode === 13) {
-            document.getElementById("submit").click();
-            submitUser();
-        }
-    });
-
-}
-
 function logout() {
     localStorage.setItem("userStatus", "logged-out");
     changeNavigationBar('logged-out');
-    containerContent('login/html/login.html')
+    redirectTo("login");
+
 }

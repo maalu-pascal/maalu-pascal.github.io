@@ -1,4 +1,12 @@
+/**
+ * To find the total of the series of numbers.
+ * 
+ * @param accumulator - The value to be added to the total.
+ * @param currentValue - The current calculated total.
+ */
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
+var arrayOfItems = [];
 /**
  * An array of objects is created with the item-name as key, and its corresponding quantity as its value.
  * 

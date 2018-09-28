@@ -1,10 +1,3 @@
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
-function dashboard() {
-    containerContent('dashboard/html/dashboard.html');
-    document.getElementById("dashboard").focus();
-    loadChart();
-}
 /**
  * Calculates the total from the corresponding inventory category.
  * 
@@ -81,7 +74,7 @@ function loadChart() {
     const green = 'rgba(105, 173, 118, 1)';
     const darkGreen = 'rgba(75, 168, 93,1)';
     const black = 'rgba(0,0,0,1)';
-    
+
     let currentStock = {
         label: 'Current Stock',
         data: [current_food, current_clothes, current_toiletries, current_medicines],
@@ -102,7 +95,7 @@ function loadChart() {
         label: 'Outbound Stock',
         data: [outbound_food, outbound_clothes, outbound_toileteries, outbound_medicines],
         backgroundColor: [green, green, green, green],
-        borderColor: [ darkGreen, darkGreen, darkGreen, darkGreen],
+        borderColor: [darkGreen, darkGreen, darkGreen, darkGreen],
         borderWidth: 1
     };
 

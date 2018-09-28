@@ -1,8 +1,3 @@
-function inventoryProductList(name, date, inventoryListName) {
-    containerContent(`${inventoryListName}/${inventoryListName}-product-list/html/${inventoryListName}-product-list.html`);
-    productList(name, date, inventoryListName);
-}
-
 /**
  * The inventory list (inbound/outbound) is read read from the localstorage.
  * The inventory whose name and date is matching with  the params-name and date, is found.
@@ -12,11 +7,12 @@ function inventoryProductList(name, date, inventoryListName) {
  * @param date - The date at which the invebtory was recorded.
  * @param inventoryListName - The name of the inventoryList stored in th LocalStorage(inbound/outbound).
  */
-function productList(name, date, inventoryListName) {
+function productList(inventoryListName, name, date) {
     let inventoryList = JSON.parse(localStorage.getItem(inventoryListName));
+    let productRow = document.getElementById("tBodyProducts");
 
-    for (eachInventory in inventoryList) {
 
+    for (eachInventory in inventoryList) {        
         if (inventoryList[eachInventory].name == name && inventoryList[eachInventory].date == date) {
 
             let inventoryDate = new Date(inventoryList[eachInventory].date);
@@ -28,17 +24,12 @@ function productList(name, date, inventoryListName) {
             arrayOfAllItems(inventoryList[eachInventory], "inventory");
 
             let productListArray = arrayOfItems.filter(function (obj) { return Object.values(obj)[0] > 0 });
-            productListArray.forEach(item => productRow(Object.keys(item)[0], Object.values(item)[0]));
-
+            productListArray.forEach(item => {
+                let product = `<tr><td>${Object.keys(item)[0]}</td>
+                                <td class = "itemQuantity" >- ${Object.values(item)[0]}</td><tr>`;
+                productRow.insertAdjacentHTML("beforeend", product);
+            });
+            break;
         }
     }
-}
-
-/**
- * Inserts a new row with the item name and its corresponding quantity.
- */
-function productRow(item, quantity) {
-    let product = `<tr><td>${item}</td><td class = "itemQuantity" >- ${quantity}</td><tr>`;
-    let productRow = document.getElementById("tBodyProducts");
-    productRow.insertAdjacentHTML("beforeend", product);
 }
