@@ -6,9 +6,14 @@
  */
 function calculateTotal(category, inventoryList) {
     let inventory_category = 0;
-    categoryInbounds = inventoryList.map(inventoryList => inventoryList.inventory[category]);
-    for (inventoryCategory of categoryInbounds) {
-        if (inventoryCategory) {
+    let categoryInbounds = inventoryList.map(inventoryList => inventoryList.inventory[category]);
+
+    for (let inventoryCategory of categoryInbounds) {
+        if (typeof (Object.values(inventoryCategory)[0]) == "object") {
+            for ( let subcategory in inventoryCategory) {
+                inventory_category += parseInt(Object.values(inventoryCategory[subcategory]).reduce(reducer));
+            }
+        } else {
             inventory_category += parseInt(Object.values(inventoryCategory).reduce(reducer));
         }
     }
@@ -16,11 +21,10 @@ function calculateTotal(category, inventoryList) {
 }
 
 /**
- * The current stock is read from the localStorage.
+ * The current stock object is read from the localStorage.
  * Total current food, medicines, toiletries and clothes is calculated.
- * The inbound and outbound is read from the localStorage.
+ * The inbound and outbound arrays are read from the localStorage.
  * Total food, medicines, toiletries and clothes in inbound and outbound is calculated separately.
- * 
  * The calculated values are then populated into the graph.
  */
 function loadChart() {
@@ -29,45 +33,32 @@ function loadChart() {
 
     //Calculating the current status of total food, medicine,clothes and toiletries.
     let stock = JSON.parse(localStorage.getItem("stock"));
-
-    let current_food = Object.values(stock.currentStock.food).reduce(reducer);
-    let current_medicines = Object.values(stock.currentStock.medicines).reduce(reducer);
-    let current_toiletries = Object.values(stock.currentStock.toiletries).reduce(reducer);
-    let current_clothes = 0;
-    for (item in stock.currentStock.clothes) {
-        current_clothes += Object.values(stock.currentStock.clothes[item]).reduce(reducer);
+    let current_stock = {};
+    for (let category in stock.currentStock) {
+        if (typeof (Object.values(stock.currentStock[category])[0]) == "object") {  //Checking for Subcategory
+            current_stock[category] = 0;
+            for ( let subcategory in stock.currentStock[category]) {
+                current_stock[category] += Object.values(stock.currentStock[category][subcategory]).reduce(reducer);
+            }
+        } else {
+            current_stock[category] = Object.values(stock.currentStock[category]).reduce(reducer);
+        }
     }
+
+    //Array of all category names.
+    let categories = Object.keys(stock.currentStock);
 
     //Calculating the total inbound of food, medicine,clothes and toiletries.
     let inboundList = JSON.parse(localStorage.getItem("inbound"));
-
-    let inbound_food = calculateTotal('food', inboundList);
-    let inbound_toileteries = calculateTotal('toiletries', inboundList);
-    let inbound_medicines = calculateTotal('medicines', inboundList);
-
-    let inbound_clothes = 0;
-    clothesInbound = inboundList.map(inboundList => inboundList.inventory.clothes);
-    for (inventorycategory of clothesInbound) {
-        for (subcategory in inventorycategory) {
-            inbound_clothes += parseInt(Object.values(inventorycategory[subcategory]).reduce(reducer));
-        }
-    }
+    let inbound_stock = {};
+    categories.forEach((category) => {inbound_stock[category] = calculateTotal(category, inboundList);});
 
     //Calculating the total number of outbound - food, medicine,clothes and toiletries.
     let outboundList = JSON.parse(localStorage.getItem("outbound"));
+    let outbound_stock = {};
+    categories.forEach((category)=> { outbound_stock[category] = calculateTotal(category, outboundList);});
 
-    let outbound_food = calculateTotal('food', outboundList);
-    let outbound_toileteries = calculateTotal('toiletries', outboundList);
-    let outbound_medicines = calculateTotal('medicines', outboundList);
-
-    let outbound_clothes = 0;
-    clothesInbound = outboundList.map(outboundList => outboundList.inventory.clothes);
-    for (inventorycategory of clothesInbound) {
-        for (subcategory in inventorycategory) {
-            outbound_clothes += parseInt(Object.values(inventorycategory[subcategory]).reduce(reducer));
-        }
-    }
-
+    //Initialising colours for bar-graph.
     const purple = 'rgba(153, 102, 255, 1)';
     const darkPurple = 'rgba(137, 79, 255,1)';
     const blue = 'rgba(103, 155, 191, 1)';
@@ -78,7 +69,7 @@ function loadChart() {
 
     let currentStock = {
         label: 'Current Stock',
-        data: [current_food, current_clothes, current_toiletries, current_medicines],
+        data: Object.values(current_stock),
         backgroundColor: [purple, purple, purple, purple],
         borderColor: [darkPurple, darkPurple, darkPurple, darkPurple],
         borderWidth: 1
@@ -86,7 +77,7 @@ function loadChart() {
 
     let inboundStock = {
         label: 'Inbound Stock',
-        data: [inbound_food, inbound_clothes, inbound_toileteries, inbound_medicines],
+        data: Object.values(inbound_stock),
         backgroundColor: [blue, blue, blue, blue],
         borderColor: [darkBlue, darkBlue, darkBlue, darkBlue],
         borderWidth: 1
@@ -94,7 +85,7 @@ function loadChart() {
 
     let outboundStock = {
         label: 'Outbound Stock',
-        data: [outbound_food, outbound_clothes, outbound_toileteries, outbound_medicines],
+        data: Object.values(outbound_stock),
         backgroundColor: [green, green, green, green],
         borderColor: [darkGreen, darkGreen, darkGreen, darkGreen],
         borderWidth: 1
@@ -103,7 +94,7 @@ function loadChart() {
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["Food", "Clothes", "Toiletries", "Medicines"],
+            labels: categories,
             datasets: [currentStock, inboundStock, outboundStock]
         },
         options: {

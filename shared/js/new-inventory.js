@@ -150,16 +150,16 @@ function submitNewList(inventoryType) {
                         }
                     } else {
 
-                        for (clothes in newInventoryObject.inventory[category][item]) {
+                        for (subCategoryItem in newInventoryObject.inventory[category][item]) {
 
-                            if (clothes == itemName[id].value) {
-                                newInventoryObject.inventory[category][item][clothes] += parseInt(itemQuantity[id].value);
+                            if (subCategoryItem == itemName[id].value) {
+                                newInventoryObject.inventory[category][item][subCategoryItem] += parseInt(itemQuantity[id].value);
 
                                 if (inventoryType == "outbound") {
-                                    currentstock.currentStock[category][item][clothes] -= parseInt(itemQuantity[id].value);
+                                    currentstock.currentStock[category][item][subCategoryItem] -= parseInt(itemQuantity[id].value);
                                 }
                                 if (inventoryType == "inbound") {
-                                    currentstock.currentStock[category][item][clothes] += parseInt(itemQuantity[id].value);
+                                    currentstock.currentStock[category][item][subCategoryItem] += parseInt(itemQuantity[id].value);
                                 }
                             }
                         }
