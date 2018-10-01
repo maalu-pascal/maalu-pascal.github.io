@@ -29,6 +29,20 @@ function changeNavigationBar(UserStatus) {
     let signedIn = document.getElementsByClassName("signed-in");
     let display = (UserStatus == "logged-in") ? "block" : "none";
     for (element of signedIn) element.style.display = display;
+
+}
+
+/**
+ * An active class is added to the active button, and the active class is removed from all the other buttons.
+ * 
+ * @param choice - The name of the active button
+ */
+function changeActiveSideBar(choice) {
+    let options = ['dashboard', 'inbound', 'outbound', 'currentStock'];
+    for (let option of options) {
+        (option == choice) ? document.getElementById(choice).classList.add("active")
+            : document.getElementById(option).classList.remove("active");
+    }
 }
 
 /**

@@ -2,7 +2,7 @@
  * The current stock is read from the localStorage and the data is fed into a table as a list.
  */
 function displayCurrentStock() {
-
+    changeActiveSideBar('currentStock');
     let stock = JSON.parse(localStorage.getItem("stock"));
     let table = document.getElementById("currentStock-tbody");
 

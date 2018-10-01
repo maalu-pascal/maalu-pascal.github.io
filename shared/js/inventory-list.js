@@ -4,6 +4,8 @@
  * @param listName - inbound/outbound 
  */
 function inventory(listName) {
+    
+    changeActiveSideBar(listName);
     let inventoryList = JSON.parse(localStorage.getItem(listName));
     let newRow = document.getElementById("tableBody");
 

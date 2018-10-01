@@ -24,6 +24,7 @@ function calculateTotal(category, inventoryList) {
  * The calculated values are then populated into the graph.
  */
 function loadChart() {
+    changeActiveSideBar('dashboard');
     let ctx = document.getElementById("myChart").getContext('2d');
 
     //Calculating the current status of total food, medicine,clothes and toiletries.
