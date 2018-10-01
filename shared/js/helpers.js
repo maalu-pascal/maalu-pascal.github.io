@@ -31,3 +31,24 @@ function arrayOfAllItems(stocks, path) {
         }
     }
 }
+
+/**
+ * Calculates the aggregate of the item values.
+ * 
+ * @param categoryInventory -An array of objects where each object holds a set of key-value pairs(the items and its correspoding stock value).
+ */
+function calculateTotal(categoryInventory) {
+    let category_total = 0;
+
+    for (let inventoryCategory of categoryInventory) {
+        if (typeof (Object.values(inventoryCategory)[0]) == "object") {
+            for (let subcategory in inventoryCategory) {
+                category_total += parseInt(Object.values(inventoryCategory[subcategory]).reduce(reducer));
+            }
+        } else {
+            category_total += parseInt(Object.values(inventoryCategory).reduce(reducer));
+        }
+    }
+    return category_total;
+}
+
