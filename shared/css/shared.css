@@ -138,7 +138,7 @@ li {
 }
 
 .content {
-    height: 88%;
+    height: 86%;
     width: 84%;
     position: relative;
     float: right;
@@ -154,7 +154,6 @@ li {
     height: 99%;
     width: 100%;
     min-width: 400px;
-    overflow: auto;
 }
 
 .container button {

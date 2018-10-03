@@ -8,16 +8,25 @@ function createNewInventory(inventoryType) {
     localStorage.setItem('last_val', 0);
     itemNumber = 0;
 
-    // let request = new XMLHttpRequest();
-    // request.open("GET", `shared/json/new-inventory.json`, false);
-    // request.send();
-    // newInventoryObject = JSON.parse(request.responseText);
-
     //To create an array of objects holding the item names and its corresponding quantity only.
     arrayOfAllItems(JSON.parse(localStorage.getItem("stock")), "currentStock");
 
+    //Poplating the data-list of items.
+    populateDatalist();
+
     //The first div with input fields for item name and quantity is created.
     createItem(inventoryType);
+}
+
+/**
+ * Poplating the data-list.
+ */
+function populateDatalist() {
+    let dataList = document.getElementById(`itemDataList`);
+    let items = arrayOfItems.map((key) => Object.keys(key)[0]);
+    items.forEach(element => {
+        dataList.insertAdjacentHTML("beforeend", `<option value=${element}></option>`);
+    });
 }
 
 /**
@@ -28,19 +37,11 @@ function createNewInventory(inventoryType) {
 function createItem(inventoryType) {
     let itemdiv = document.getElementById("newItemInputs");
     let itemDivData = `<div id = itemDiv[${itemNumber}] class= itemDiv>
-                        <div class = "itemInputField"><input type='text' list="itemsList${itemNumber}" id= item[${itemNumber}] class='item' placeholder = "Enter Item" ></input>
-                        <datalist id="itemsList${itemNumber}"></datalist></div>
+                        <div class = "itemInputField"><input type='text' list="itemDataList" id= item[${itemNumber}] class='item' placeholder = "Enter Item" ></input></div>
                         <div><input type='number' id= quantity[${itemNumber}] class= 'quantity' placeholder = "Enter quantity"></input></div> 
                         <button type="button" id = "deleteButton" class="deleteItem" onclick="deleteItem('${itemNumber}')"> Delete </button>
                         </div>`;
     itemdiv.insertAdjacentHTML("beforeend", itemDivData);
-
-    //Populating the data-list
-    let dataList = document.getElementById(`itemsList${itemNumber}`);
-    let items = arrayOfItems.map((key) => Object.keys(key)[0]);
-    items.forEach(element => {
-        dataList.innerHTML += `<option value=${element}></option>`;
-    });
 
     localStorage.setItem('last_val', itemNumber);
     itemNumber++;
@@ -174,9 +175,7 @@ function submitNewList(inventoryType) {
         newInventoryObject.date = new Date();
 
         inventoryList = JSON.parse(localStorage.getItem(inventoryType));
-
         inventoryList.unshift(newInventoryObject);
-
         localStorage.setItem(inventoryType, JSON.stringify(inventoryList));
 
         redirectTo(inventoryType, inventoryType);

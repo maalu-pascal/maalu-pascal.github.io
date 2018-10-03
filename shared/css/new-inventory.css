@@ -37,10 +37,6 @@
     background: #b8b8b8;
 }
 
-.itemInputField {
-    overflow: visible;
-}
-
 .itemInputs {
     overflow: scroll;
     height: 80%;
