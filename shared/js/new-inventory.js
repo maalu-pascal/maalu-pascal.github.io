@@ -1,4 +1,7 @@
 /**
+ * Initializing some global data.
+ * Populating the data-list.
+ * Render the createItem().
  * 
  * @param inventoryType - inbound/outbound
  */
@@ -8,10 +11,7 @@ function createNewInventory(inventoryType) {
     localStorage.setItem('last_val', 0);
     itemNumber = 0;
 
-    //To create an array of objects holding the item names and its corresponding quantity only.
-    arrayOfAllItems(JSON.parse(localStorage.getItem("stock")), "currentStock");
-
-    //Poplating the data-list of items.
+    //Populating the data-list of items.
     populateDatalist();
 
     //The first div with input fields for item name and quantity is created.
@@ -19,10 +19,12 @@ function createNewInventory(inventoryType) {
 }
 
 /**
- * Poplating the data-list.
+ * Populating the data-list.
  */
 function populateDatalist() {
     let dataList = document.getElementById(`itemDataList`);
+    let arrayOfItems = arrayOfAllItems(JSON.parse(localStorage.getItem("stock")), "currentStock");
+
     let items = arrayOfItems.map((key) => Object.keys(key)[0]);
     items.forEach(element => {
         dataList.insertAdjacentHTML("beforeend", `<option value=${element}></option>`);
@@ -67,6 +69,7 @@ function validateNewItems(inventoryType) {
     let error;
     let itemNames = document.getElementsByClassName(`item`);
     let itemQuantity = document.getElementsByClassName(`quantity`);
+    let arrayOfItems = arrayOfAllItems(JSON.parse(localStorage.getItem("stock")), "currentStock");
 
     if (!document.getElementById(`new${inventoryType}Name`).value) {
         error = "* Please enter name";
@@ -90,12 +93,16 @@ function validateNewItems(inventoryType) {
         } else {
             let itemFoundFlag = false;
             let foundItem = arrayOfItems.find(function (obj) { return Object.keys(obj)[0] === itemNames[id].value });
+
             if (foundItem) {
                 itemFoundFlag = true;
                 if (inventoryType == "outbound") {
+
                     if (foundItem[itemNames[id].value] < itemQuantity[id].value) {
                         error = `Quantity of ${itemNames[id].value} available is ${foundItem[itemNames[id].value]}`;
                         itemQuantity[id].focus();
+                    } else {
+                        foundItem[itemNames[id].value] -= itemQuantity[id].value;
                     }
                 }
             }

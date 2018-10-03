@@ -21,7 +21,7 @@ function productList(inventoryListName, name, date) {
             document.getElementById("dateSpan").innerHTML = inventoryDate;
 
             //To create an array of objects(arrayOfItems[]) which holds the item-names and its corresponding quantity.
-            arrayOfAllItems(inventoryList[eachInventory], "inventory");
+            let arrayOfItems = arrayOfAllItems(inventoryList[eachInventory], "inventory");
 
             let productListArray = arrayOfItems.filter(function (obj) { return Object.values(obj)[0] > 0 });
             productListArray.forEach(item => {

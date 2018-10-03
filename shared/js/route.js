@@ -91,7 +91,7 @@ function redirectTo(name, inventoryType, inventoryName, inventoryDate) {
 
     //The corresponding html section is rendered.
     containerContent(route.path);
-
+    
     //inventoryName, inventoryDate is only for redirectTo('inventory-product-list').
     if (route.javascriptFunction) window[route.javascriptFunction](inventoryType, inventoryName, inventoryDate);    
 }

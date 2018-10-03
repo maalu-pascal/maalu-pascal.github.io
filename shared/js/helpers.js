@@ -30,6 +30,7 @@ function arrayOfAllItems(stocks, path) {
             }
         }
     }
+    return arrayOfItems;
 }
 
 /**
