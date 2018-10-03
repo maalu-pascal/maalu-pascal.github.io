@@ -102,6 +102,8 @@ function validateNewItems(inventoryType) {
                         error = `Quantity of ${itemNames[id].value} available is ${foundItem[itemNames[id].value]}`;
                         itemQuantity[id].focus();
                     } else {
+                        
+                        //If the item is entered for the second time, the quantity required the previous time should also be stored.
                         foundItem[itemNames[id].value] -= itemQuantity[id].value;
                     }
                 }
