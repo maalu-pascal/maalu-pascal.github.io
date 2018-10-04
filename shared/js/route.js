@@ -3,7 +3,7 @@ const routes = [
         html: 'welcome/html/welcome.html',
         javascriptFunction: '',
         name: 'welcome',
-        script: '.',
+        script: '',
         style: '<link rel="stylesheet" type="text/css" media="screen" href="welcome/css/welcome.css" />',
         url: 'welcome'
     },

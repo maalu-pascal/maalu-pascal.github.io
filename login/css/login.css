@@ -1,5 +1,5 @@
 .login {
-    width: 310px;
+    width: 340px;
     height:400px;
     position: relative;
     margin: auto;
@@ -16,12 +16,13 @@
     width: 240px;
     border-radius: 5px;
     border: 1px solid black;
+    margin: 0px 0px 10px 20px;
 }
 
 .login button {
     display: flex;
     margin: auto;
-    margin-top:30px;
+    margin-top:10px;
 
 }
 

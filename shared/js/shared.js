@@ -56,3 +56,14 @@ function containerContent(path) {
     req.send();
     document.getElementById("content").innerHTML = req.responseText;
 }
+
+/**
+ * The user status is set to logged-out in th localStorage.
+ * The view is changed by changing the side and top navigation bar.
+ * Page is redirected to login.
+ */
+function logout() {
+    localStorage.setItem("userStatus", "logged-out");
+    changeNavigationBar('logged-out');
+    redirectTo("login");
+}

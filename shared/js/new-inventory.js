@@ -39,12 +39,14 @@ function populateDatalist() {
 function createItem(inventoryType) {
     let itemdiv = document.getElementById("newItemInputs");
     let itemDivData = `<div id = itemDiv[${itemNumber}] class= itemDiv>
-                        <div class = "itemInputField"><input type='text' list="itemDataList" id= item[${itemNumber}] class='item' placeholder = "Enter Item" ></input></div>
+                        <div class = "itemInputField"><input type='text' list="itemDataList" id= 'item[${itemNumber}]' class='item' placeholder = "Enter Item" ></input></div>
                         <div><input type='number' id= quantity[${itemNumber}] class= 'quantity' placeholder = "Enter quantity"></input></div> 
                         <button type="button" id = "deleteButton" class="deleteItem" onclick="deleteItem('${itemNumber}')"> Delete </button>
                         </div>`;
     itemdiv.insertAdjacentHTML("beforeend", itemDivData);
 
+    document.getElementById(`item[${itemNumber}]`).focus();
+    
     localStorage.setItem('last_val', itemNumber);
     itemNumber++;
 }
