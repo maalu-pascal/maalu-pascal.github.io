@@ -1,5 +1,5 @@
 #currentStockData {
-    height: 93%;
+    height: 90%;
     overflow: scroll;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .currentStockTable tr {
-    background-color: #999999;
+    background-color: #c5c5c5;
     border-bottom: 1pt solid black;
 }
 
