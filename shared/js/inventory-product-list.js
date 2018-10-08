@@ -9,10 +9,10 @@
  */
 function productList(inventoryListName, name, date) {
     let inventoryList = JSON.parse(localStorage.getItem(inventoryListName));
-    let productRow = document.getElementById("tBodyProducts");
+    let productRow = document.getElementById("productsTable").getElementsByTagName('tbody')[0];
 
 
-    for (eachInventory in inventoryList) {        
+    for (eachInventory in inventoryList) {
         if (inventoryList[eachInventory].name == name && inventoryList[eachInventory].date == date) {
 
             let inventoryDate = new Date(inventoryList[eachInventory].date);
@@ -25,9 +25,9 @@ function productList(inventoryListName, name, date) {
 
             let productListArray = arrayOfItems.filter(function (obj) { return Object.values(obj)[0] > 0 });
             productListArray.forEach(item => {
-                let product = `<tr><td>${Object.keys(item)[0]}</td>
-                                <td class = "itemQuantity" >- ${Object.values(item)[0]}</td><tr>`;
-                productRow.insertAdjacentHTML("beforeend", product);
+                let row = productRow.insertRow();
+                row.insertCell(0).innerHTML = `${Object.keys(item)[0]}`;
+                row.insertCell(1).innerHTML = `- ${Object.values(item)[0]}`;
             });
             break;
         }

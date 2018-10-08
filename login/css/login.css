@@ -1,6 +1,6 @@
 .login {
     width: 340px;
-    height:400px;
+    height: 400px;
     position: relative;
     margin: auto;
     background: rgb(169, 169, 169, 0.5);
@@ -16,20 +16,19 @@
     width: 240px;
     border-radius: 5px;
     border: 1px solid black;
-    margin: 0px 0px 10px 20px;
+    margin: 0 0 10px 20px;
 }
 
 .login button {
     display: flex;
     margin: auto;
-    margin-top:10px;
-
+    margin-top: 10px;
 }
 
 .login h3 {
     color: rgb(168, 154, 126);
     text-shadow: 2px 2px #272727;
-    margin: 0px;
+    margin: 0;
     font-size: 40px;
     text-align: center;
 }

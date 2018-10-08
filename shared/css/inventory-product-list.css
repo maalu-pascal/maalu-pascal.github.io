@@ -1,4 +1,4 @@
-#nameSpan, #dateSpan, .itemQuantity {
+#nameSpan, #dateSpan, .productsTable td:nth-child(2) {
     margin-left: 20px;
     color: #0a0808;
 }
@@ -39,7 +39,7 @@
 }
 
 .products h3 {
-    margin: 0px;
+    margin: 0;
 }
 
 .productsTable {

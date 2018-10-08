@@ -10,7 +10,7 @@
 }
 
 .inventoryListDiv h1 {
-    margin: 0px;
+    margin: 0;
     margin-top: 10px;
     padding: 5px;
 }
@@ -19,6 +19,7 @@
     margin: 10px;
     text-align: center;
 }
+
 .inventoryTable {
     width: 100%;
     border-bottom-left-radius: 3px;
@@ -32,28 +33,26 @@
     font-weight: bold;
 }
 
-.tableBody tr, .inventoryTable th {
+.inventoryTable tr, .inventoryTable th {
     padding: 8px;
     border-collapse: collapse;
     border: 1px solid #202020;
     font-family: sans-serif;
 }
 
-.tableBody tr:hover {
+.inventoryTable tr:hover {
     cursor: pointer;
+    background-color: #ddd;
 }
+
 .inventoryTable th {
     background-color: #b4b4b4;
     text-align: center;
 }
 
-.tableBody tr {
+.inventoryTable tr {
     background-color: #999999;
     border-bottom: #2c2c2c;
-}
-
-.tableBody tr:hover {
-    background-color: #ddd;
 }
 
 .inventoryTable td {

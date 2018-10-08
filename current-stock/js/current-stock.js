@@ -4,7 +4,7 @@
 function displayCurrentStock() {
     changeActiveSideBar('currentStock');
     let stock = JSON.parse(localStorage.getItem("stock"));
-    let table = document.getElementById("currentStock-tbody");
+    let table = document.getElementById("currentStockTable");
 
     for (category in stock.currentStock) {
         let row = table.insertRow();

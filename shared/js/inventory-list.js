@@ -4,10 +4,10 @@
  * @param listName - inbound/outbound 
  */
 function inventory(listName) {
-    
+
     changeActiveSideBar(listName);
     let inventoryList = JSON.parse(localStorage.getItem(listName));
-    let newRow = document.getElementById("tableBody");
+    let table = document.getElementById("inventoryTable").getElementsByTagName('tbody')[0];
 
     if (inventoryList == "") {
         let element = document.getElementById("inventoryListContainer");
@@ -16,10 +16,11 @@ function inventory(listName) {
         for (eachInventory in inventoryList) {
             let inventoryDate = new Date(inventoryList[eachInventory].date);
             inventoryDate = inventoryDate.toDateString();
-            let row = `<tr onclick= "redirectTo('${listName}-product-list','${listName}','${inventoryList[eachInventory].name}','${inventoryList[eachInventory].date}')">
-                       <td>${inventoryList[eachInventory].name}</td>
-                       <td>${inventoryDate}</td> </tr>`;
-            newRow.insertAdjacentHTML("beforeend", row);
+
+            let row = table.insertRow();
+            row.setAttribute("onclick", `redirectTo('${listName}-product-list','${listName}','${inventoryList[eachInventory].name}','${inventoryList[eachInventory].date}')`);
+            row.insertCell(0).innerHTML = `${inventoryList[eachInventory].name}`;
+            row.insertCell(1).innerHTML = `${inventoryDate}`;
         }
     }
 }
