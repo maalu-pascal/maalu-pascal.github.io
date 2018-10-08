@@ -49,6 +49,11 @@ li {
     cursor: move;
 }
 
+::-webkit-scrollbar-corner {
+    background: rgba(85, 85, 85, 0);
+}
+
+
 .logo {
     width: 18%;
 }
