@@ -1,0 +1,72 @@
+.newInventoryContainer {
+    height: 97%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#newInventoryError {
+    color: rgb(163, 3, 3);
+}
+
+.newItemInputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.itemDiv {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: baseline;
+}
+
+.itemDiv input {
+    margin: 10px 10px 5px 5px;
+    height: 25px;
+    background: #d6d6d6;
+    border: 1px solid dimgrey;
+}
+
+.addItem {
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.deleteItem {
+    margin-left: 30px;
+    background: #b8b8b8;
+}
+
+.itemInputs {
+    overflow: scroll;
+    height: 80%;
+    padding: 5px;
+    margin-top: 20px;
+}
+
+.newInventoryContainer span {
+    margin: 5px;
+    font-size: 18px;
+}
+
+.form input {
+    padding: 1%;
+    height: 25px;
+    background: none;
+    border-bottom: 1.5px solid #5a5a5a;
+}
+
+.form input:focus {
+    border-bottom: 1.5px solid #5a5a5a;
+}
+
+.form {
+    margin: 5px;
+    margin-bottom: 10px;
+}
+
+#submitList {
+    width: 80px;
+    align-self: center;
+    font-weight: bold;
+}

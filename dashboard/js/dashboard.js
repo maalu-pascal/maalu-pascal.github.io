@@ -1,111 +1,80 @@
+/**
+ * The current stock object is read from the localStorage.
+ * Total current food, medicines, toiletries and clothes is calculated.
+ * The inbound and outbound arrays are read from the localStorage.
+ * Total food, medicines, toiletries and clothes in inbound and outbound is calculated separately.
+ * The calculated values are then populated into the graph.
+ */
 function loadChart() {
-    var ctx = document.getElementById("myChart").getContext('2d');
-   
-    var req = new XMLHttpRequest();
-    req.open("GET", '../dashboard/json/dashboard.json', false);
-    req.send(null);
+    changeActiveSideBar('dashboard');
+    let ctx = document.getElementById("myChart").getContext('2d');
 
-    var data = req.responseText;
-    var stock = JSON.parse(data);
+    //Calculating the current status of total food, medicine,clothes and toiletries.
+    let stock = JSON.parse(localStorage.getItem("stock"));
 
-    var current_food = 0;
-    var current_clothes = 0;
-    var current_toiletries = 0;
-    var current_medicines = 0;
+    //Array of all category names.
+    let categories = Object.keys(stock.currentStock);
 
-    //Calculating the current status of total number of boxes of food.
-    for (item in stock.currentStock.food) {
-        current_food += stock.currentStock.food[item];
-    }
+    let current_stock = {};
+    categories.forEach((category) => {
+        let currentStockArray = [];
+        currentStockArray.push(stock.currentStock[category]);
+        current_stock[category] = calculateTotal(currentStockArray);
+    });
 
-    //Calculating the current status of total number of boxes of toiletries.
-    for (item in stock.currentStock.toiletries) {
-        current_toiletries += stock.currentStock.toiletries[item];
-    }
+    //Calculating the total inbound of food, medicine,clothes and toiletries.
+    let inboundList = JSON.parse(localStorage.getItem("inbound"));
+    let inbound_stock = {};
+    categories.forEach((category) => {
+        let categoryInventory = inboundList.map(inboundList => inboundList.inventory[category]);
+        inbound_stock[category] = calculateTotal(categoryInventory);
+    });
 
-    //Calculating the current status of total number of boxes medicine.
-    for (item in stock.currentStock.medicine) {
-        current_medicines += stock.currentStock.medicine[item];
-    }
+    //Calculating the total number of outbound - food, medicine,clothes and toiletries.
+    let outboundList = JSON.parse(localStorage.getItem("outbound"));
+    let outbound_stock = {};
+    categories.forEach((category) => {
+        let categoryInventory = outboundList.map(outboundList => outboundList.inventory[category]);
+        outbound_stock[category] = calculateTotal(categoryInventory);
+    });
 
-    //Calculating the current status of total number of boxes clothes.
-    for (item in stock.currentStock.clothes) {
-        for (cloth in stock.currentStock.clothes[item]) {
+    //Initialising colours for bar-graph.
+    const purple = 'rgba(153, 102, 255, 1)';
+    const darkPurple = 'rgba(137, 79, 255,1)';
+    const blue = 'rgba(103, 155, 191, 1)';
+    const darkBlue = 'rgba(54, 162, 235, 1)';
+    const green = 'rgba(105, 173, 118, 1)';
+    const darkGreen = 'rgba(75, 168, 93,1)';
+    const black = 'rgba(0,0,0,1)';
 
-            current_clothes += stock.currentStock.clothes[item][cloth];
-        }
-    }
-
-    //Dummy values for inbound
-    var inbound_food = 25;
-    var inbound_clothes = 15;
-    var inbound_toileteries = 13;
-    var inbound_medicines = 13;
-
-    //Dummy values for outbound
-    var outbound_food = 50;
-    var outbound_clothes = 32;
-    var outbound_toileteries = 12;
-    var outbound_medicines = 12;
-
-    var currentStock = {
+    let currentStock = {
         label: 'Current Stock',
-        data: [current_food, current_clothes, current_toiletries, current_medicines],
-        backgroundColor: [
-            'rgba(153, 102, 255, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(153, 102, 255, 1)'
-        ],
-        borderColor: [
-            'rgba(153, 102, 255, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(153, 102, 255, 1)'
-        ],
+        data: Object.values(current_stock),
+        backgroundColor: [purple, purple, purple, purple],
+        borderColor: [darkPurple, darkPurple, darkPurple, darkPurple],
         borderWidth: 1
     };
 
-    var inboundStock = {
+    let inboundStock = {
         label: 'Inbound Stock',
-        data: [inbound_food, inbound_clothes, inbound_toileteries, inbound_medicines],
-        backgroundColor: [
-            'rgba(103, 155, 191, 1)',
-            'rgba(103, 155, 191, 1)',
-            'rgba(103, 155, 191, 1)',
-            'rgba(103, 155, 191, 1)'
-        ],
-        borderColor: [
-            'rgba(54, 162, 235, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(54, 162, 235, 1)'
-        ],
+        data: Object.values(inbound_stock),
+        backgroundColor: [blue, blue, blue, blue],
+        borderColor: [darkBlue, darkBlue, darkBlue, darkBlue],
         borderWidth: 1
     };
 
-    var outboundStock = {
+    let outboundStock = {
         label: 'Outbound Stock',
-        data: [outbound_food, outbound_clothes, outbound_toileteries, outbound_medicines],
-        backgroundColor: [
-            'rgba(105, 173, 118, 1)',
-            'rgba(105, 173, 118, 1)',
-            'rgba(105, 173, 118, 1)',
-            'rgba(105, 173, 118, 1)'
-        ],
-        borderColor: [
-            'rgba(75, 168, 93,1)',
-            'rgba(75, 168, 93,1)',
-            'rgba(75, 168, 93,1)',
-            'rgba(75, 168, 93,1)'
-        ],
+        data: Object.values(outbound_stock),
+        backgroundColor: [green, green, green, green],
+        borderColor: [darkGreen, darkGreen, darkGreen, darkGreen],
         borderWidth: 1
     };
 
-    var myChart = new Chart(ctx, {
+    new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["Food", "Clothes", "Toiletries", "Medicines"],
+            labels: categories,
             datasets: [currentStock, inboundStock, outboundStock]
         },
         options: {
@@ -113,17 +82,16 @@ function loadChart() {
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
-                        fontColor: "#000",
-
+                        fontColor: black,
                     }
                 }],
                 xAxes: [{
                     ticks: {
-                        fontColor: "#000",
+                        fontColor: black,
                     }
                 }]
             },
-            responsive: false
+            responsive: true
         }
     });
 }

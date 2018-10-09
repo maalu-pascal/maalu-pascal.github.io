@@ -1,16 +1,34 @@
-function submitUser() {
-    var userName = document.getElementById("username").value;
-    var userPassword = document.getElementById("userpassword").value;
-    var userFound = 0;
-    var errorMessage;
-    if (userName == "" || userPassword == "") {
-        // alert("Please enter username/password");
-        errorMessage = "*Please enter username/password";
-        // document.getElementById("errorMessage").innerHTML="Please enter username/password";
-        document.getElementById("errorMessage").innerHTML = errorMessage;
+/**
+ * Event listener is added for the login password input field.
+ * When the enter key is pressed in the login page, the submit button is clicked.
+ * 
+ * @param e - key up event.
+ */
+function checkSubmit(e) {
+    let input = document.getElementById("userpassword");
+    input.addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            document.getElementById("submit").click();
+            validateUser();
+        }
+    });
 
+}
+
+/**
+ * Validation is done when the user submits username and password.
+ */
+function validateUser() {
+    let userName = document.getElementById("username").value;
+    let userPassword = document.getElementById("userpassword").value;
+    let userFound = 0;
+    let errorMessage;
+    if (userName == "" || userPassword == "") {
+        errorMessage = "*Please enter username/password";
+        document.getElementById("errorMessage").innerHTML = errorMessage;
     } else {
-        fetch('../login/json/login.json')
+        fetch('login/json/login.json')
             .then(res => res.json())
             .then((out) => {
                 for (element of out.users) {
@@ -24,9 +42,18 @@ function submitUser() {
                     errorMessage = "*Invalid username/password";
                     document.getElementById("errorMessage").innerHTML = errorMessage;
                 }
-
             }).catch(err => console.error(err));
-
     }
+}
 
+/**
+ * This function is called when the login process is a success.
+ * The status of the user is set to logged-in in the local storage.
+ * The necessary changes are made in the navvigation bar.
+ * Function to load the dashboard is called.
+ */
+function login() {
+    localStorage.setItem("userStatus", "logged-in");
+    changeNavigationBar('logged-in');
+    redirectTo("dashboard");
 }

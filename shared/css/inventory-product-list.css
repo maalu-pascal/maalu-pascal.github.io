@@ -1,0 +1,47 @@
+#nameSpan, #dateSpan, .productsTable td:nth-child(2) {
+    margin-left: 20px;
+    color: #0a0808;
+}
+
+.productListContainer {
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    padding: 2% 1% 1% 30px;
+    overflow: scroll;
+}
+
+.productList {
+    width: 92%;
+    min-width: 350px;
+    min-height: 150px;
+    text-transform: capitalize;
+    padding: 15px;
+    opacity: 1;
+    color: #000000;
+    float: inherit;
+    overflow: auto;
+    margin: 20px;
+}
+
+.productList #back {
+    float: right;
+}
+
+.products {
+    display: flex;
+    align-content: center;
+}
+
+.products td {
+    font-size: 17px;
+    font-weight: 550;
+}
+
+.products h3 {
+    margin: 0;
+}
+
+.productsTable {
+    padding: 20px;
+}

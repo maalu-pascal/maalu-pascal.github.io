@@ -1,30 +1,14 @@
-.container {
-    background-color: rgba(146, 146, 146, 0.8);
-    border-radius: 10px;
-    box-sizing: border-box;
-    padding: 2%;
-    margin: 0px;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-}
-
-.heading {
-    display: flex;
-    height: 20%;
-    align-items: center;
-}
-
 .chart-container {
     opacity: 1;
-    height: 70%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: auto;
+    width: 60%;
+    min-width: 300px;
+    height: 40%;
+    min-height: 200px;
 }
 
 canvas {
     background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 30px;
+    border: 1px solid black;
 }

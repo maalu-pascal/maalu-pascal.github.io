@@ -15,19 +15,19 @@
         },
         "clothes": {
             "men": {
-                "shirt": 4,
-                "bottom": 4,
-                "innerwear": 4
+                "shirt-men": 4,
+                "pant": 4,
+                "innerwear-men": 4
             },
             "women": {
                 "top": 4,
-                "bottom": 4,
-                "innerwear": 4
+                "bottom-women": 4,
+                "innerwear-women": 4
             },
             "kids": {
-                "top": 5,
-                "bottom": 5,
-                "innerwear": 5
+                "shirt-kids": 4,
+                "bottom-kids": 4,
+                "innerwear-kids": 4
             }
         },
         "toiletries": {
@@ -38,7 +38,7 @@
             "mug": 3,
             "towel": 4
         },
-        "medicine": {
+        "medicines": {
             "dettol": 2,
             "dolo": 2,
             "bandaid": 5,

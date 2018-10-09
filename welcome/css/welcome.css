@@ -1,12 +1,13 @@
-.welcome {
-    position: relative;
+#welcome {
+    position: absolute;
     margin-top: 12%;
-    margin-left: 1%;
+    text-align: center;
+    width: 100%;
 }
 
 .welcomeUser {
     color: rgb(168, 154, 126);
     text-shadow: 2px 2px #272727;
     font-size: 70px;
-    text-align: center;
+    font-family: serif;
 }

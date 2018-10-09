@@ -1,0 +1,62 @@
+.inventoryListDiv {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.inventoryList {
+    height: 92%;
+    overflow: scroll;
+}
+
+.inventoryListDiv h1 {
+    margin: 0;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.emptyInventory {
+    margin: 10px;
+    text-align: center;
+}
+
+.inventoryTable {
+    width: 100%;
+    border-bottom-left-radius: 3px;
+    border-collapse: collapse;
+    border-bottom-right-radius: 3px;
+}
+
+.newInventoryButton {
+    margin: 10px 0 10px 0;
+    float: right;
+    font-weight: bold;
+}
+
+.inventoryTable tr, .inventoryTable th {
+    padding: 8px;
+    border-collapse: collapse;
+    border: 1px solid #202020;
+    font-family: sans-serif;
+}
+
+.inventoryTable tr:hover {
+    cursor: pointer;
+    background-color: #ddd;
+}
+
+.inventoryTable th {
+    background-color: #b4b4b4;
+    text-align: center;
+}
+
+.inventoryTable tr {
+    background-color: #d0d0d0;
+    border-bottom: #2c2c2c;
+}
+
+.inventoryTable td {
+    padding: 5px;
+    padding-left: 5%;
+    border: 1px solid #202020;
+}

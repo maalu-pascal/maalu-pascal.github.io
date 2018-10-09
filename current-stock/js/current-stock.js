@@ -1,30 +1,34 @@
-function currentStock() {
-    containerContent('../current-stock/html/current-stock.html');
-    displayCurrentStock();
-}
-
+/**
+ * The current stock is read from the localStorage and the data is fed into a table as a list.
+ */
 function displayCurrentStock() {
-    
-    var data = localStorage.getItem("stock");
-    var stock = JSON.parse(data);
-    var table = document.getElementById("currentStockData");
+    changeActiveSideBar('currentStock');
+    let stock = JSON.parse(localStorage.getItem("stock"));
+    let table = document.getElementById("currentStockTable");
+
     for (category in stock.currentStock) {
-        var row = "<ul><li><h4>" + category + " : </h4>";
+        let row = table.insertRow();
+        row.insertCell(0).innerHTML = `<h4>${category} : </h4>`;
+        let items = "";
         for (item in stock.currentStock[category]) {
 
             if (typeof (stock.currentStock[category][item]) == "object") {
-                row += "<ul><li>" + item + " : " + "<ul>";
+                items += `<ul id = 'subcategory'> <li>${item} : <ul>`;
                 for (subcategory in stock.currentStock[category][item]) {
-                    row += "<li>" + subcategory + " : " + stock.currentStock[category][item][subcategory] + "</li>";
+                    items += `<li> ${subcategory} : ${stock.currentStock[category][item][subcategory]}</li>`;
                 }
-                row += "</ul></li></ul>";
+                items += "</ul></li></ul>";
             } else {
-                row += "<ul><li>" + item + " : " + stock.currentStock[category][item] + "</li></ul>";
+                items += `<li> ${item} : ${stock.currentStock[category][item]} </li>`;
             }
         }
-        row += "</li></ul>";
-        table.innerHTML += row;
 
+        //The total of the items in the category.
+        let currentStockArray = [];
+        currentStockArray.push(stock.currentStock[category]);
+        let current_stock = calculateTotal(currentStockArray);
+
+        items += `<br><li> <b>Total ${category} : ${current_stock}</b></li>`;
+        row.insertCell(1).innerHTML = items;
     }
-
 }
