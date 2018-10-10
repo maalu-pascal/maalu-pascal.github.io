@@ -1,23 +1,29 @@
 window.onload = function (event) {
-    let UserStatus = localStorage.getItem("userStatus");
 
-    //Loading the necessary initial data into the local storage.
-    if (!UserStatus) {
-        localStorage.setItem("userStatus", "logged-out");
-    }
-    if (!localStorage.getItem("stock")) {
-        let data = fetch('shared/json/initial-stock.json')
-            .then(res => res.json())
-            .then((out) => {
-                let stock = JSON.stringify(out);
-                localStorage.setItem("stock", stock);
-            }).catch(err => console.error(err));
-    }
-    if (!localStorage.getItem("inbound")) localStorage.setItem("inbound", "[]");
-    if (!localStorage.getItem("outbound")) localStorage.setItem("outbound", "[]");
+    //Check if localstorage is supported. 
+    if (typeof (Storage) !== "undefined") {
+        let UserStatus = localStorage.getItem("userStatus");
+        //Loading the necessary initial data into the local storage.
+        if (!UserStatus) {
+            localStorage.setItem("userStatus", "logged-out");
+        }
+        if (!localStorage.getItem("stock")) {
+            let data = fetch('shared/json/initial-stock.json')
+                .then(res => res.json())
+                .then((out) => {
+                    let stock = JSON.stringify(out);
+                    localStorage.setItem("stock", stock);
+                }).catch(err => console.error(err));
+        }
+        if (!localStorage.getItem("inbound")) localStorage.setItem("inbound", "[]");
+        if (!localStorage.getItem("outbound")) localStorage.setItem("outbound", "[]");
 
-    changeNavigationBar(UserStatus);
-    (UserStatus == "logged-in") ? redirectTo("dashboard") : redirectTo("welcome");
+        changeNavigationBar(UserStatus);
+        (UserStatus == "logged-in") ? redirectTo("dashboard") : redirectTo("welcome");
+    } else {
+        changeNavigationBar();
+        document.getElementById("content").innerHTML = `<h2 style="background:black; color: white;" align="center"><b>*Please update your browser to use this page<b></h2>`;
+    }
 }
 
 /**
