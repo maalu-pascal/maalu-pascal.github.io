@@ -36,6 +36,9 @@ function changeNavigationBar(UserStatus) {
     let display = (UserStatus == "logged-in") ? "block" : "none";
     for (element of signedIn) element.style.display = display;
 
+    let contentDiv = document.getElementById("content");
+    let width = (UserStatus == "logged-in") ? "84%" : "100%";
+    contentDiv.style.width = width;
 }
 
 /**
